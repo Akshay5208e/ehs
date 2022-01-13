@@ -39,6 +39,10 @@ import CouponInfo from "./helper/couponInfo";
 import CartContext from "./helper/cartContext";
 import Success from "./components/SuccessPage/SuccessPage";
 import DiyHome from "./components/DIY/Components/DiyHome/DiyHome";
+// import ResourceMainPage from "./components/ResourcesPage/ResourceMainPage";
+import DetailedArticle from "./components/ResourcesPage/DetailedArticle"
+import SearchPage from "./components/SearchPage/SearchPage";
+import ResourceMainPage from "./components/ResourcesPage/ResourceMainPage";
 
 const  ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -94,6 +98,7 @@ function App(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchData]);
 
+
   return (
     <div className="App">
       <DesContext.Provider value={{ DesDetail: setDescription },[textFieldData, setTextFieldData]}>
@@ -101,9 +106,9 @@ function App(props) {
       <CartContext.Provider value={[cartCountN, setCartCountN]}>
         <Router >
         <ScrollToTop />
-          <NavBar
-          
-          />
+
+        {/* <NavBar /> */}
+          <NavBar  />
           
           <Switch>
             <Route exact path="/">
@@ -114,6 +119,8 @@ function App(props) {
               <About />
             </Route>
 
+            {/* <Route exact path="/resources" component={ResourceMainPage} />
+          <Route exact path="/:name" component={DetailedArticle} /> */}
             
             <Route exact path="/DIY">
               <DiyHome />
@@ -122,6 +129,9 @@ function App(props) {
 
             <Route exact path="/track">
               <TrackOrder />
+            </Route>
+            <Route exact path="/searchPage">
+              <SearchPage />
             </Route>
 
             <Route exact path="/search">

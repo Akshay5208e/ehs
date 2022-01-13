@@ -49,8 +49,8 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
   });
   const [theTextData, setTextData] = React.useState({
     id: textData.id,
-    x: textData.x || 0,
-    y: textData.y || 0,
+    x: textData.x || -4,
+    y: textData.y || -20,
     fontSize: textData.fontSize || 28,
     fontFamily: textData.fontFamily || "sans-serif",
     fontWeight: textData.fontWeight || "normal",

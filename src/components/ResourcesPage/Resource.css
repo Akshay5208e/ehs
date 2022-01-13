@@ -1,0 +1,30 @@
+.inline{
+    display: inline-block;
+}
+.body{
+    overflow-x: hidden;
+}
+.jumbotron{
+    background-color: rgb(240, 240, 240);
+}
+.jumbotron h1{
+    font-weight: 600;
+}
+.text-color{
+    color: #003459;
+}
+.myborder{
+    border-color: #003459;
+}
+.btn-outline-primary{
+    color: #003459;
+    border-color: #003459;
+}
+.btn-outline-primary:hover{
+    background-color: #003459;
+    color: white;
+    border-color: #003459;
+}
+.card-text{
+    color: grey;
+}

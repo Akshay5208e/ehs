@@ -1,24 +1,23 @@
-// Import the functions you need from the SDKs you need
-import firebase from "firebase";
+import firebase from 'firebase/app'
+import "firebase/auth"
 
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+ const firebaseConfig = {
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-
-
-  // fill your credentials
-
-
-};
-
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-firebase.initializeApp(firebaseConfig)
-firebase.analytics();
+  apiKey: "AIzaSyAjcwffiZB8S4Yy8Ni1KE3tGbuxkwzhqdg",
+  authDomain: "lateral-replica-338110.firebaseapp.com",
+  projectId: "lateral-replica-338110",
+  storageBucket: "lateral-replica-338110.appspot.com",
+  messagingSenderId: "741775479046",
+  appId: "1:741775479046:web:7585d0420efa57ff868e87",
+  measurementId: "G-6N5PN7LFWY"
+}
 
 
-export default firebase
+export const app= firebase.initializeApp(firebaseConfig)
+
+const auth = firebase.auth();
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+const facebookAuthProvider = new firebase.auth.FacebookAuthProvider(); 
+
+export {auth, googleAuthProvider, facebookAuthProvider}

@@ -2,8 +2,9 @@ import React,{useState,useEffect} from "react";
 import "./Login.css";
 import ReactDOM from 'react-dom';
 import EhsLogo from "../../images/EhsLogo2.png";
-import { setLoginResponse } from "../../redux/actions/index.js";
-import { Link } from "react-router-dom";
+import { facebookSignInInitiate, googleSignInInitiate, setLoginResponse } from "../../redux/actions/index.js";
+import { useDispatch,useSelector } from "react-redux";
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import Axios from "axios";
 import {API} from "../../backend"
 import { login, verifyOtp } from "../../helper/apiPath";
@@ -16,8 +17,13 @@ import Spinner from "react-loading";
 import withReactContent from 'sweetalert2-react-content';
 import ErrorIcon from '@material-ui/icons/Error';
 import { GoogleLogin } from 'react-google-login';
-import { facebookProvider, googleProvider } from "../../firebase/authMethods";
-import socialMediaAuth from "../../firebase/authService/auth";
+import { useContext } from "react";
+import { UserContext } from "../../firebase/userContext";
+
+
+
+
+// import socialMediaAuth from "../../firebase/authService/auth";
 
 // import {SocialIcon} from 'react-social-icons';
 
@@ -31,6 +37,28 @@ const Login = (props) => {
 
   const [name, setName] = useState("Shubh");
   const [loading,setLoading] = useState(false);
+
+
+  const history = useHistory()
+  const location = useLocation()
+  const dispatch = useDispatch();
+
+  // const {currentUser} = useSelector(state=>state.user)
+//  useEffect(() => {
+//    if(currentUser){
+//      history.push("/")
+//    }
+//  }, [currentUser,history ])
+
+
+const currentUser = useContext(UserContext)
+useEffect(() => {
+ if(currentUser){
+   history.push("/")
+ }
+}, [currentUser])
+
+
 
   useEffect(()=>{
     if(loading){
@@ -81,11 +109,11 @@ const Login = (props) => {
      // $("#loginErrorMsg").text(d);
     }
   }
-  const handleAuthOnClick = async (provider)=>{
-    const res = await socialMediaAuth(provider);
-    console.log(res)
+//   const handleAuthOnClick = async (provider)=>{
+//     const res = await socialMediaAuth(provider);
+//     console.log(res)
     
-}
+// }
 
   function loginReq(loginbody) {
     Axios.post(`${API}auth/login`, loginbody)
@@ -148,6 +176,19 @@ const Login = (props) => {
 
 
   // -------------------------------------- social login with firebase-----------------------------------
+
+const handleGoogleSignIn=()=>{
+  dispatch(googleSignInInitiate())
+  
+
+}
+
+const handleFacebookSignIn=()=>{
+  dispatch(facebookSignInInitiate())
+}
+
+
+
   
 
   return (
@@ -180,7 +221,7 @@ const Login = (props) => {
                 // callback={responseFacebook} 
                 /> */}
           <div className="Google_login text-center my-2">
-            <button style={{backgroundColor:"white", }} className="p-1 widthControl"  onClick={()=>handleAuthOnClick(googleProvider)} >
+            <button style={{backgroundColor:"white", }} className="p-1 widthControl"   onClick={handleGoogleSignIn}>
               <img src ="https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1" className="image-fluid inline align-middle px-1" width="44" height="auto"/>
               <p style={{marginBottom:"0",}} className="inline align-middle px-2 h6">Continue with Google</p>
             </button>
@@ -188,7 +229,7 @@ const Login = (props) => {
 
           {/* -----------Facebook login button------------- */}
             <div className="Google_login text-center my-3">
-              <button style={{backgroundColor:"#3b5998", borderColor:"#3b5998",}} className="p-2 widthControl"  onClick={()=>handleAuthOnClick(facebookProvider)} >
+              <button style={{backgroundColor:"#3b5998", borderColor:"#3b5998",}} className="p-2 widthControl"   onClick={handleFacebookSignIn} >
                 <img src ="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" className="image-fluid inline align-middle px-1" width="35" height="auto"/>
                 <p style={{marginBottom:"0", color:"white"}} className="inline align-middle px-2 h6">Continue with Facebook</p>
               </button>

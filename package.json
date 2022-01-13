@@ -48,6 +48,8 @@
     "react-textarea-autosize": "^8.3.3",
     "react-transliterate": "^1.1.8",
     "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.1",
     "sanitize-html": "^2.6.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.4",

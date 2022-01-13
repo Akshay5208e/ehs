@@ -140,7 +140,7 @@ const Pictograms = ({ pictogramImgData }) => {
                       fill="#fff"
                     />
                   </svg>
-                  <p>Prohibitiob </p>
+                  <p>Prohibition </p>
                 </button>
               </div>
               <div className="d-flex">

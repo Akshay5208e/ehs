@@ -1,17 +1,21 @@
 import React,{useEffect,useState} from "react";
 import "./Login.css";
 import EhsLogo from "../../images/EhsLogo2.png";
-import { Link, Redirect } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import axios from "axios";
 import {API} from "../../backend"
 import Otp from "./Otp";
 import $ from "jquery"
-import { setLoginResponse } from "../../redux/actions/index.js";
+import { setLoginResponse,facebookSignInInitiate, googleSignInInitiate } from "../../redux/actions/index.js";
 import { connect } from "react-redux";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { useForm } from "react-hook-form";
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
+import { useContext } from "react";
+import { UserContext } from "../../firebase/userContext";
+
 
 const Signup = (props) => {
   const [token, setToken] = React.useState("");
@@ -23,6 +27,35 @@ const Signup = (props) => {
     password: "",
     isAccountActive: false,
   });
+
+
+  const history = useHistory()
+  const dispatch = useDispatch();
+
+  const currentUser = useContext(UserContext)
+useEffect(() => {
+ if(currentUser){
+   history.push("/")
+ }
+}, [currentUser])
+
+
+ // -------------------------------------- social login with firebase-----------------------------------
+
+ const handleGoogleSignIn=()=>{
+  dispatch(googleSignInInitiate())
+  
+
+}
+
+const handleFacebookSignIn=()=>{
+  dispatch(facebookSignInInitiate())
+}
+
+
+
+
+
 
   const { register,handleSubmit,formState: { errors },getValues , setValue } = useForm({
     mode: "onTouched"
@@ -115,17 +148,17 @@ const Signup = (props) => {
 
           {/* -----------Google login------------- */}
           <div className="Google_login text-center my-2">
-            <button style={{backgroundColor:"white", }} className="p-1 widthControl">
+            <button style={{backgroundColor:"white", }} className="p-1 widthControl"   onClick={handleGoogleSignIn}>
               <img src ="https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1" className="image-fluid inline align-middle px-1" width="44" height="auto"/>
-              <p style={{marginBottom:"0",}} className="inline align-middle px-2 h6">Signup with Google</p>
+              <p style={{marginBottom:"0",}} className="inline align-middle px-2 h6">Continue with Google</p>
             </button>
           </div>
 
           {/* -----------Facebook login button------------- */}
             <div className="Google_login text-center my-3">
-              <button style={{backgroundColor:"#3b5998", borderColor:"#3b5998",}} className="p-2 widthControl">
+              <button style={{backgroundColor:"#3b5998", borderColor:"#3b5998",}} className="p-2 widthControl"   onClick={handleFacebookSignIn} >
                 <img src ="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" className="image-fluid inline align-middle px-1" width="35" height="auto"/>
-                <p style={{marginBottom:"0", color:"white"}} className="inline align-middle px-2 h6">Signup with Facebook</p>
+                <p style={{marginBottom:"0", color:"white"}} className="inline align-middle px-2 h6">Continue with Facebook</p>
               </button>
             </div>
 

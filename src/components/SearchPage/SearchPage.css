@@ -1,0 +1,36 @@
+.carousel-item{
+    background-color: white;
+    border: none;
+    border-radius: 0px;
+    
+}
+.carousel-item button{
+    display: inline-block;
+    padding: 8px 25px;
+    color: #003459;
+    font-weight: 600;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 30px;
+    margin-top: 20px;
+}
+.carousel-item button:hover{
+    background-color: lightblue;
+    color: rgb(15, 134, 214);
+    border-color: rgb(15, 134, 214);
+}
+.carousel-control-prev, .carousel-control-next{
+    background-color: white;
+    opacity: 100%;
+    z-index: 0;
+}
+.carousel-control-prev-icon, .carousel-control-next-icon{
+    color: gray !important;
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.margin_y{
+    margin: 10% 0 ;
+}

@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Axios from "axios";
 import {API} from "../../backend"
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ProductCard from "../signages/ProductCard";
 
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
@@ -34,6 +34,10 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {useForm} from "react-hook-form";
 import { data } from "jquery";
 import Spinner from "react-loading";
+import { useContext } from "react";
+import { UserContext } from "../../firebase/userContext";
+import  {useDispatch,useSelector} from "react-redux"
+import { logoutInitiate } from "../../redux/actions";
 
 
 const MySwal = withReactContent(Swal);
@@ -41,6 +45,7 @@ const MySwal = withReactContent(Swal);
 
 
 const PaymentCard = (props) => {
+
   return(
     <div className="p-2 pl-3" style={props.default ? {
       width: "211px",
@@ -96,6 +101,9 @@ const PersonalInfo = () => {
   const [email,setEmail] = useState("");
   const [phone,setPhone] = useState("");
   const [loading,setLoading] = useState(false);
+
+  const currentUser= useContext(UserContext)
+
   useEffect(()=>{
     if(loading){
         MySwal.fire({
@@ -629,7 +637,7 @@ const breakPoints = [
                   type="text" 
                   className="inputUpdatefield"
                   name="name"
-                  defaultValue={name}
+                  defaultValue={currentUser? currentUser.displayName: name}
                   {...register1("name")}
                   />
               </div>
@@ -640,7 +648,7 @@ const breakPoints = [
                   pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" 
                   className="inputUpdatefield"
                   name="emailid"
-                  defaultValue={email}
+                  defaultValue={currentUser? currentUser.email:email}
                   {...register1("emailid")}
                   />
               </div>
@@ -1849,6 +1857,21 @@ const Quotes = () => {
 export default function Dashboard(props) {
   const [authUser, setAuthUser] = React.useState("");
   const [loading,setLoading] = useState(false);
+  const history = useHistory();
+
+  const currentUser = useContext(UserContext)
+
+  const dispatch = useDispatch();
+  const onLogoutHandle = ()=>{
+    if(currentUser){
+      dispatch(logoutInitiate())
+    }
+    history.push("/");
+    MySwal.close();
+  }
+
+
+
   useEffect(()=>{
     if(loading){
         MySwal.fire({
@@ -1987,7 +2010,8 @@ export default function Dashboard(props) {
                                       <div className="confirmationMsg ">
                                       Are you sure you want to logout from EHS Prints?
                                       </div>
-                                      <button className="confirmationBtn yesBtnMargin" onClick={onConfirm} >Yes</button>
+                                      {currentUser?(<button className="confirmationBtn yesBtnMargin" onClick={onLogoutHandle} >Yes</button>):(<button className="confirmationBtn yesBtnMargin" onClick={onConfirm} >Yes</button>)}
+                                
                                       <button className="confirmationBtn" onClick={onCancel} style={{borderColor: "#C51D1D"}}>Cancel</button>
                                     </div>,
                               position: "center",

@@ -392,7 +392,8 @@ const DiyHomeOne = () => {
         <DesktopMacIcon fontSize="large"/>
       </div>
       <div className="diy-header">
-        <h3 className="container diy-header-h3">DIY</h3>
+        <h3 className="container diy-header-h3">CREATE YOUR OWN</h3>
+        {/* <h3 className="container diy-header-h3">DO IT YOURSELF</h3> */}
       </div>
       <div className="d-flex pt-4">
         <div

@@ -88,9 +88,9 @@ const MainBody = ({
   // --------------------img-------------
   const [position, setPosition] = useState({
     x: 15,
-    y: 50,
-    width: 180,
-    height: 180,
+    y: 65,
+    width: 170,
+    height: 170,
   });
 
   function onResize(event, direction, ref, delta) {

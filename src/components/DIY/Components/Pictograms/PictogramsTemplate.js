@@ -11,7 +11,7 @@ const PictogramsTemplate = ({ img, pictogramImgData }) => {
             style={{ cursor: "pointer" }}
             onClick={() => pictogramImgData(imgId)}
           >
-            <img width="123px" height="123px" src={allImg} alt="" />
+            <img width="120px" height="120px" src={allImg} alt="" />
           </a>
         </div>
       </div>

@@ -48,8 +48,8 @@ const BodyEditableText = React.forwardRef((props, ref) => {
   });
   const [theTextData, setTextData] = React.useState({
     id: textData.id,
-    x: textData.x || 0,
-    y: textData.y || 0,
+    x: textData.x || -4,
+    y: textData.y || -14,
     fontSize: textData.fontSize || 14,
     fontFamily: textData.fontFamily || "sans-serif",
     fontWeight: textData.fontWeight || "normal",

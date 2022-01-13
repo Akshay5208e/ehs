@@ -6,7 +6,7 @@ import Zoom from "react-reveal/Zoom";
 import Axios from "axios";
 import {API} from "../../../backend";
 import {Link} from "react-router-dom"
-import './bestsellersNew.css'
+// import './bestsellersNew.css'
 
 const Card = (props) => {
     return(
@@ -28,7 +28,7 @@ const  BestsellersNew = (props) =>  {
     useEffect(()=>{
       Axios.get(`${API}posters/getPosterByCatSubCat`, {params: {category_slug: "posters", bestseller: 1}}).then((res)=>{
         setPostersBestseller(res.data.data.postersExists);
-    //    console.log("bestseller",res);
+    // console.log("bestseller",res);
       }).catch((err)=> {
         console.log(err);
       });
@@ -84,9 +84,11 @@ const  BestsellersNew = (props) =>  {
             <div className="my-3">
                 <p className="bestsellerSubHead">Floor Graphics</p>
                 <div className="bestsellerContainer">
-                    
+                
                     {
                         floorgraphicsBestselller && floorgraphicsBestselller.slice(0,4).map((val,i)=>{
+                            console.log( floorgraphicsBestselller)
+                        
                             return(
                               <Link  to="">  <Card title={val.name ? val.name : "-"} imgUrl={val.imgUrl.length>0 ? val.imgUrl[0] : ""} /></Link>
                             )
@@ -100,8 +102,10 @@ const  BestsellersNew = (props) =>  {
                     
                     {
                         assetmarkingsBestselller && assetmarkingsBestselller.slice(0,4).map((val,i)=>{
+                            console.log( assetmarkingsBestselller)
+                        
                             return(
-                               <Link  to=""> <Card title={val.name ? val.name : "-"} imgUrl={val.imgUrl.length>0 ? val.imgUrl[0] : ""} /></Link>
+                                <Link  to={`/${val.category[0].cat_slug}/${val.subCategory[0].sub_cat_slug}/product/id=${val._id}`}> <Card title={val.name ? val.name : "-"} imgUrl={val.imgUrl.length>0 ? val.imgUrl[0] : ""} /></Link>
                             )
                         })
                     }

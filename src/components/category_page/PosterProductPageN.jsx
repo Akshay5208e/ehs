@@ -1360,7 +1360,7 @@ const changeDimension = (e) => {
                     <div className=" pt-4 pt-sm-0   catTagSKU ">
                         <p><span style={{ fontWeight: "600" }}>Category: </span>{product.category[0].title}, {product.subCategory[0].title}</p>
                         {
-                            product.tags.length>0 ?  <p><span style={{ fontWeight: "600" }}>Tags: </span>{
+                            product.tags.length>0 ?  <p style ={{ display:'flex', marginTop:'15px'}}><span style={{ fontWeight: "600" }}>Tags: </span>{
                             product.tags.map((val, i) => {
                                 return (
                                     <span key={i}>{val}...</span>
@@ -1368,8 +1368,10 @@ const changeDimension = (e) => {
                             })
                         }</p> : ""
                         }
-                        <p style={{display:'flex'}}><span style={{ fontWeight: "600" }}>SKU: </span>{product.sku}</p>
                         
+                        <div> <p style={{display:'flex', marginTop:'15px'}}><span style={{ fontWeight: "600" }}>SKU: </span>{product.sku}</p>
+                        </div>
+                       
                     </div>
 
                     {/* <button

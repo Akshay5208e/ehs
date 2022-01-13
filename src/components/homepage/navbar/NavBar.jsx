@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,  useContext } from "react";
 import "./NavBar.css";
 import EhsLogo from "../../../images/EhsLogo.svg";
 import Vector from "../../../images/Vector.svg";
@@ -14,7 +14,8 @@ import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Person, PersonOutline } from "@material-ui/icons";
-
+import { UserContext } from "../../../firebase/userContext";
+import { SearchContext } from "../../SearchPage/SearchContext";
 
 
 
@@ -27,7 +28,34 @@ const NavBar = (props) => {
   const [textFieldData, setTextFieldData] = useState({});
 
   const [posts, setPosts] = useState([]);
-  const [searchTitle, setSearchTitle] = useState("");
+
+
+  //----------------fore search------------------------------//
+  const [searchTitle, setSearchTitle] = useState('');
+  const {searchTerm,setSearchTerm,update} = useContext(SearchContext)
+
+  //  useEffect(() => console.log(searchTerm), [searchTerm]);
+
+  function getSearch(val)
+  {
+    setSearchTitle(val.target.value)
+   update(val.target.value)
+
+
+
+    // console.log(searchTerm)
+  }
+
+  
+  
+
+  //---------------------------------------------------//
+
+
+
+
+
+  const currentUser = useContext(UserContext)
 
   useEffect(() => {
     Axios.get(`${API}category/getCategoryById`).then((res)=>{
@@ -255,6 +283,8 @@ const NavBar = (props) => {
       
   };
   return (
+   
+
     <div className="navbar_z_index">
         <div className="d-sm-none d-block" style={{width: "100%", height: "58px"}}></div>
         <nav className="container-fluid  navbar navbar-expand-sm navbar-dark d-flex "  id="navBarTop"> 
@@ -269,13 +299,13 @@ const NavBar = (props) => {
                 aria-hidden="true"
                 style={{ color: "white", border: "0px", width: "10%",height: "8%" }}
                 onClick={searchIcon}
-              />
+                />
            
         <li className="nav-item mb-0 mr-0 mt-1 d-block  d-sm-none" style={{ marginTop: "-2px" }}>
               <Link
                 to="/cart"
                 className="nav-link text-white textColorAndWeight"
-              >
+                >
                 <img className="ml-1" src={ShopCart} alt="Shop" />
                 <span
                   className="text-center"
@@ -290,14 +320,14 @@ const NavBar = (props) => {
                     paddingTop: "1.5px",
                     
                   }}
-                >
+                  >
                   {
                     (cart)?(
                       cart.length
-                    ):(
-                      "0"
-                    )
-                  }
+                      ):(
+                        "0"
+                        )
+                      }
                 </span>
               </Link>
             </li>
@@ -307,7 +337,7 @@ const NavBar = (props) => {
               <button className="btn btn-secondary bg-white textColorAndWeight shadow-none searchDropBtn"
                 type="button"
                 id="dropdownMenuButton" onClick={searchCatDropdown}
-              >
+                >
                 <img src={Vector} className="mr-sm-2 mr-1 "  alt="" />
                 {searchCat}
               </button>
@@ -325,58 +355,59 @@ const NavBar = (props) => {
                         className="searchCategory dropdown-item px-sm-3  searchCatMobile"
                         style={{color: "#757575"}}
                         
-                      ><img src={Vector} className="mr-sm-3 mr-1 "  alt="" />
+                        ><img src={Vector} className="mr-sm-3 mr-1 "  alt="" />
                         {v}
                       </Link>
                     </>
                   ) : (
                     <Link
-                      key={i}
-                      to={"/cat/" + v.toLowerCase()}
-                      onClick={searchCatogoriesOnClick}
-                      className="searchCategory  dropdown-item  btnCat  searchCatMobile"
-                      style={{color: "#757575"}}
-                      
+                    key={i}
+                    to={"/cat/" + v.toLowerCase()}
+                    onClick={searchCatogoriesOnClick}
+                    className="searchCategory  dropdown-item  btnCat  searchCatMobile"
+                    style={{color: "#757575"}}
+                    
                     >
                       {v}
                     </Link>
                   )
-                )}
+                  )}
               </div>
             </div>
               <SearchIcon
                 className="pl-3 bg-white d-none d-sm-block"
                 aria-hidden="true"
                 style={{ color: "grey", height: "35px",width: "40px", borderTop: "1px solid #757575",borderBottom: "1px solid #757575" }}
-              />
+                />
             
-
+            <Link to ="/searchPage" className="width"> 
             <input
               type="text"
-              className="form-control bg-white shadow-none searchBarInput"
+              className="form-control bg-white shadow-none searchBarInput w-100"
               placeholder="Search for posters, signages and more"
-              onChange={(e) => setSearchTitle(e.target.value)}
-            />
+              onChange={getSearch}
+              />
+            </Link>
          
           </div>
           <button className="d-block d-sm-none float-right ml-auto mt-2" style={{
-              width: "100px",
-              height: "35px",
-              border: "1px solid #F2994A",
-              boxSizing: "border-box",
-              borderRadius: "4px",
-              fontFamily: "Source Sans Pro",
-              fontStyle: "normal",
-              fontWeight: "600",
-              fontSize: "14px",
-              lineHeight: "14px",
-              textAlign: "center",
-              letterSpacing: "0.2px",
-              color: "#F2994A",
-              background: "transparent",
-            }}
-            onClick={searchIcon}
-             >Search</button>
+            width: "100px",
+            height: "35px",
+            border: "1px solid #F2994A",
+            boxSizing: "border-box",
+            borderRadius: "4px",
+            fontFamily: "Source Sans Pro",
+            fontStyle: "normal",
+            fontWeight: "600",
+            fontSize: "14px",
+            lineHeight: "14px",
+            textAlign: "center",
+            letterSpacing: "0.2px",
+            color: "#F2994A",
+            background: "transparent",
+          }}
+          onClick={searchIcon}
+          >Search</button>
          <div
               className="nav-item d-none d-lg-flex  mx-auto "
               style={{
@@ -384,15 +415,22 @@ const NavBar = (props) => {
                 color: "#ffffff",
                 alignItems:'center',
                 
-               
+                
                 
               }}
-            >
-              {authUser ? (
-                <Link to="/dashboard" className=" textColorAndWeight text-decoration-none"><AccountCircleIcon className="" style={{transform: "scale(1.4,1.4)"}} /></Link>
+              >
+              {(authUser||currentUser) ? (
                 
-              ) : (
-                <>
+                authUser?
+                (<Link to="/dashboard" className=" textColorAndWeight text-decoration-none"><AccountCircleIcon className="" style={{transform: "scale(1.4,1.4)"}} /></Link>)
+                :
+                currentUser.photoURL? 
+                (<Link to="/dashboard" className=" textColorAndWeight text-decoration-none"><div className="userProfilePic"><img src={currentUser.photoURL} /></div></Link>)
+                :
+                (<Link to="/dashboard" className=" textColorAndWeight text-decoration-none"><AccountCircleIcon className="" style={{transform: "scale(1.4,1.4)"}} /></Link>)
+                
+                ) : (
+                  <>
                    <Link
                     to="/login"
                     className=" textColorAndWeight text-decoration-none"
@@ -400,7 +438,7 @@ const NavBar = (props) => {
                       color: 'white',
                       padding: '2px',
                     }}
-                  >
+                    >
                     Login
                   </Link>{" "}
                   |{" "} 
@@ -412,9 +450,9 @@ const NavBar = (props) => {
                       alignItems:'center',
                       color: "#ffffff",
                       padding: '2px',
-                    
+                      
                     }}
-                  >
+                    >
                   Register
                   </Link>
                 </>
@@ -424,7 +462,7 @@ const NavBar = (props) => {
               <Link
                 to="/cart"
                 className="nav-link text-white textColorAndWeight"
-              >
+                >
                 <img className="" src={ShopCart} alt="Shop" />
                 <span
                   className="text-center"
@@ -437,16 +475,16 @@ const NavBar = (props) => {
                     width: "17px",
                     height: "17px",
                     paddingTop: "1.5px",
-                  
+                    
                   }}
-                >
+                  >
                   {
                     (cart)?(
                       cart.length
-                    ):(
-                      "0"
-                    )
-                  }
+                      ):(
+                        "0"
+                        )
+                      }
                 </span>
               </Link>
             </div>
@@ -464,7 +502,7 @@ const NavBar = (props) => {
                   className="nav-link text-white textColorAndWeight btn shadow-none drpbut menuRemove d-inline-block" 
                   onClick={hamburger}
                   style={{ backgroundColor: "#003459", border: "0px" }}
-                >
+                  >
                   Posters
                 </Link><ArrowForwardIosRoundedIcon className="float-right mt-1 d-sm-none d-inline-block posterDropdownArrow" onClick={posterDropdownArrow} style={{width: "15px", color: "white"}} />
                 <div className="dropdown-content p-sm-3 p-0 posterDropdown animate__animated  animate__faster">
@@ -476,11 +514,11 @@ const NavBar = (props) => {
                   {categories && (categories[0].sub_category).map((val,i)=>{
                     return(
                       <Link
-                         className="searchCategory dropdown-item posterDropdownArrow menuRemove text-capitalize   " 
-                         onClick={posterDropdown}
-                          to={`/${categories[0].cat_slug}/subcat/${val.sub_cat_slug}`}
+                      className="searchCategory dropdown-item posterDropdownArrow menuRemove text-capitalize   " 
+                      onClick={posterDropdown}
+                      to={`/${categories[0].cat_slug}/subcat/${val.sub_cat_slug}`}
                           key={i}
-                      >
+                          >
                     {val.title}
                   </Link>
                     )
@@ -498,7 +536,7 @@ const NavBar = (props) => {
                   onClick={hamburger}
                   style={{ backgroundColor: "#003459", border: "0px" }}
                   
-                >
+                  >
                   Signages
                 </Link><ArrowForwardIosRoundedIcon className="mt-1 float-right d-sm-none d-inline-block signageDropdownArrow" onClick={signageDropdownArrow} style={{width: "15px", color: "white"}} />
                 <div className="dropdown-content signageDropdown animate__animated  animate__faster  p-sm-3 p-0">
@@ -510,11 +548,11 @@ const NavBar = (props) => {
                   {categories && (categories[1].sub_category).map((val,i)=>{
                     return(
                       <Link
-                         className="searchCategory dropdown-item signageDropdownArrow menuRemove text-capitalize   " 
-                         onClick={signageDropdown}
-                          to={`/${categories[1].cat_slug}/subcat/${val.sub_cat_slug}`}
-                          key={i}
-                          >
+                      className="searchCategory dropdown-item signageDropdownArrow menuRemove text-capitalize   " 
+                      onClick={signageDropdown}
+                      to={`/${categories[1].cat_slug}/subcat/${val.sub_cat_slug}`}
+                      key={i}
+                      >
                         {val.title}
                       </Link>
                     )
@@ -528,7 +566,7 @@ const NavBar = (props) => {
                   to={`/cat/${categories[2].cat_slug}`}
                   className="nav-link text-white textColorAndWeight btn shadow-none border-0 menuRemove d-inline-block" onClick={hamburger}
                   style={{ backgroundColor: "#003459", border: "0px" }}
-                >
+                  >
                   Floor Graphics
                 </Link>
                 <ArrowForwardIosRoundedIcon className="float-right mt-1 d-sm-none d-inline-block floorDropdownArrow" onClick={floorDropdownArrow} style={{width: "15px", color: "white"}} />
@@ -541,10 +579,10 @@ const NavBar = (props) => {
                   {categories && (categories[2].sub_category).map((val,i)=>{
                     return(
                       <Link
-                         className="searchCategory dropdown-item floorDropdownArrow menuRemove text-capitalize   " 
-                         onClick={floorDropdown}
-                          to={`/${categories[2].cat_slug}/subcat/${val.sub_cat_slug}`}
-                          key={i}
+                      className="searchCategory dropdown-item floorDropdownArrow menuRemove text-capitalize   " 
+                      onClick={floorDropdown}
+                      to={`/${categories[2].cat_slug}/subcat/${val.sub_cat_slug}`}
+                      key={i}
                       >
                     {val.title}
                   </Link>
@@ -560,7 +598,7 @@ const NavBar = (props) => {
                 to={`/cat/${categories[3].cat_slug}`}
                 className="nav-link text-white textColorAndWeight btn shadow-none border-0 menuRemove d-inline-block" onClick={hamburger}
                 style={{ backgroundColor: "#003459", border: "0px" }}
-              >
+                >
                 Asset Marking
               </Link>
               <ArrowForwardIosRoundedIcon className="float-right mt-1 d-sm-none d-inline-block assetDropdownArrow" onClick={assetDropdownArrow} style={{width: "15px", color: "white"}} />
@@ -572,6 +610,7 @@ const NavBar = (props) => {
                   </Link>
                   {categories && (categories[3].sub_category).map((val,i)=>{
                     return(
+                    
                       <Link
                          className="searchCategory dropdown-item assetDropdownArrow menuRemove text-capitalize   " 
                          onClick={assetDropdown}
@@ -646,7 +685,7 @@ const NavBar = (props) => {
               </Link>
             </li>
             <li className="nav-item mb-0 ">
-              <Link className="nav-link text-white textColorAndWeight menuRemove" onClick={hamburger} to="/#">
+              <Link className="nav-link text-white textColorAndWeight menuRemove" onClick={hamburger} to="/resources">
                 Resources
               </Link>
             </li>
@@ -684,7 +723,17 @@ const NavBar = (props) => {
                 color: "#F2994A",
               }}
             >
-              {authUser ? (
+              {(authUser || currentUser) ? 
+              
+              currentUser?(
+                <p
+                  className="text-white textColorAndWeight text-decoration-none"
+                  style={{ marginTop: "13px" }}
+                >
+                  {currentUser.displayName}
+                </p>
+              ):
+              (
                 <p
                   className="text-white textColorAndWeight text-decoration-none"
                   style={{ marginTop: "13px" }}
@@ -709,7 +758,23 @@ const NavBar = (props) => {
                 </>
               )}
             </li>
-            {authUser ? (
+            {(authUser || currentUser)  ?
+            
+            currentUser?
+
+            (
+              <>
+                <li className="nav-item ml-4">
+                  <Link
+                    to="/dashboard"
+                    className="nav-link text-white textColorAndWeight btn shadow-none border-0"
+                    style={{ backgroundColor: "#003459", border: "0px" }}
+                  >
+                    Profile
+                  </Link>
+                </li>
+              </>
+            ) :(
               <>
                 <li className="nav-item ml-4">
                   <Link
