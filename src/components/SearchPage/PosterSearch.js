@@ -15,6 +15,7 @@ const Card = (props) => {
 
 
 
+
 function PosterSearch({key}) {
     const [allPosters, setAllPosters] = useState([]);
     const [allItems, setAllItems] = useState([])

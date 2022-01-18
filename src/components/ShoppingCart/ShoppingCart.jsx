@@ -400,7 +400,9 @@ const Tables = (props) => {
 
         { (cartItem.length > 0) ? (
           
+          
           <div>
+            {console.log(cartItem)}
             <div className="row padding-10 mt-5">
               <div className="col-sm-8 col">
               <table className="table ">
@@ -419,7 +421,9 @@ const Tables = (props) => {
                   </thead>
                   <tbody>
                     {cartItem.map((v, i) => {
-                      //console.log(v);
+                      if(v.poster_details)
+                      {
+                        //console.log(v);
                         // setTotalPay(totalPay => totalPay + v.total);
                         // cartItem.reduce((totalPay, { v.total }) => totalPay + v.total, 0)
                         let indiTotal = 0;
@@ -558,6 +562,7 @@ const Tables = (props) => {
                             ₹ {indiTotal}
                         </td>
                       </tr>)
+                      }
                     })}
                   </tbody>
                 </table>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import imgCaution from "../../Image/Caution_7x10_01.jpeg";
 import Background from "../Background/Background";
 import Logo from "../Logo/Logo";
@@ -23,6 +23,14 @@ import Transliterate from "../TestSector/Transliterate";
 import TextAreaHeight from "../TestSector/TextAreaHeight";
 import Html2canvase from "../TestSector/Html2canvase";
 import DesktopMacIcon from '@material-ui/icons/DesktopMac';
+import { useHistory, useParams } from "react-router";
+import CartContext from "../../../../helper/cartContext";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import {API} from '../../../../backend'
+import Axios from 'axios'
 
 // let useClickOutside = (handler) => {
 //   let domNode = useRef();
@@ -221,6 +229,192 @@ const DiyHomeOne = () => {
       a.click();
     });
   };
+
+
+  //-----------------------------------for adding to cart------------------------------//
+
+  const MySwal = withReactContent(Swal);
+
+  const [authUser, setAuthUser] = useState("")
+  const { catSlug, subCatSlug, productId } = useParams();
+  const [initialAmount, setInitialAmount] = useState();
+  const [amount, setAmount] = useState(initialAmount);
+  const [quantity, setQuantity] = useState(1);
+  const [price, setPrice] = useState(0);
+  const [material,setMaterial] = useState("");
+  const [dim,setDim] = useState("");
+  const [finalMatDim,setFinalMatDim] = useState("");
+
+  const [product,setProduct] = useState({
+    imgUrl: [],name: "",description: "",category: [{title: ""}], subCategory: [{title: ""}],tags: [],sku: "",materialDimension: []
+});
+
+
+const [cartCountN, setCartCountN] = useContext(CartContext);
+let history = useHistory();
+
+useEffect(() => {
+  // setLoading(true);
+  // Axios.get(`${API}posters/getPosterById`, { params: { poster_obj_id: productId } }).then((res) => {
+  //     setProduct(res.data.data.posterDetails[0]);
+  //     //console.log(res);
+  //     setAuthor(res.data.data.posterDetails[0].authors[0]);
+  //     setOtherLanguagePoster(res.data.data.posterDetails[0].poster_language_connector)
+  //     setRating(res.data.data.posterDetails[0].average_rating);
+  //     setRatingTotal(res.data.data.ratingTotalWise);
+  //     setTotalNoOfRating(res.data.data.totalNoOfRating);
+  //     setMatDim(res.data.data.posterDetails[0].materialDimension);
+  //     console.log(res.data.data.posterDetails[0])
+  //     filterMatDim(res.data.data.posterDetails[0].materialDimension);
+  //     setYouMayLike(res.data.data.youMayAlsoLike);
+  //     setSimilarItems(res.data.data.realtedPosters);
+  //     setLoading(false);
+  // }).catch((err) => {
+  //     console.log(err)
+  // });
+
+
+  if (JSON.parse(localStorage.getItem("userDetails123")))
+  setAuthUser(
+    JSON.parse(localStorage.getItem("userDetails123")).emailid ||
+      JSON.parse(localStorage.getItem("userDetails123")).phonenumber
+  );
+ // console.log(authUser,localStorage.getItem("userDetails123"),product);
+},[]);
+  const idGenerator=()=>{
+
+  }
+  const imgGenerator=()=>{
+
+  }
+
+  const addToCartConfirmPopup = () => {
+    MySwal.fire(
+        {
+            html: <div className="d-flex">
+                <HighlightOffIcon onClick={MySwal.close} role="button" style={{
+                    position: "absolute",
+                    top: "2px",
+                    right: "2px",
+                    color: "#000"
+                }} />
+                <CheckCircleIcon style={{
+                    color: "#F2994A",
+                    position: "absolute",
+                    top: "18px",
+                    left: "23px",
+                    background: "#FFF",
+                    borderRadius: "50%",
+                    border: "none",
+                }} />
+                <img src={product.imgUrl[0]} alt="productImage" className="toastImg " />
+                <div className="ml-2 ">
+                    <p className="toastAddedText">Added to Cart</p>
+                    <p className="qtyPopupText text-left font-weight-normal mb-1" >{product.name}</p>
+                    <p className="qtyPopupText text-left mb-0" style={{ fontWeight: "600" }}>Quantity: {quantity}</p>
+                    <a href="/cart"><p className="mb-0" style={{
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        lineHeight: "20px",
+                        textDecorationLine: "underline",
+                        color: "#F2994A",
+                        textAlign: "right"
+                    }}>View Cart</p></a>
+                </div>
+            </div>,
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            scrollbarPadding: false,
+            timer: 3000,
+            showClass: {
+                popup: 'animate__animated animate__fadeIn  animate__faster',
+                backdrop: 'swal2-noanimation'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__slideOutRight  animate__faster',
+                backdrop: 'swal2-noanimation'
+            },
+            customClass: "toastStructure"
+        })
+}
+
+  const addToCart=()=>{
+
+  //   //console.log(localStorage.getItem("ehstoken12345678910"));
+  //   if (authUser) {
+  //     Axios.post(`${API}auth/update_user_cart`, {
+  //         poster_obj_id: product._id,
+  //         material_obj_id: finalMatDim,
+  //         quantity: quantity,
+  //     },
+  //         {
+  //             headers: { "x-access-token": localStorage.getItem("ehstoken12345678910") },
+  //             params: { userId: JSON.parse(localStorage.getItem("userDetails123"))._id }
+  //         })
+  //         .then((res) => {
+  //             console.log(res);
+  //             addToCartConfirmPopup();
+  //             window.location.reload(false);
+  //             setCartCountN(res.data.data.cart.length);
+  //             Axios.get(`${API}posters/getPosterById`, { params: { poster_obj_id: productId } }).then((res) => {
+  //                 setProduct(res.data.data.posterDetails[0]);
+  //                 console.log(res);
+  //                 // setRating(res.data.data.posterDetails[0].average_rating);
+  //                 // setRatingTotal(res.data.data.ratingTotalWise);
+  //                 // setTotalNoOfRating(res.data.data.totalNoOfRating);
+  //                 // //console.log(res.data.data.posterDetails[0])
+  //                 // setYouMayLike(res.data.data.youMayAlsoLike);
+  //                 // setSimilarItems(res.data.data.realtedPosters);
+  //             }).catch((err) => {
+  //                 console.log(err)
+  //             });
+  //         }).catch((err) => {
+  //             console.log(err);
+  //         })
+  // }
+  // else {
+  //     let ehsCart = [];
+  //     let mat = {
+  //         material_title: material,
+  //         dimension_title: dim,
+  //         price: price
+  //     }
+  //     let finalProduct = {
+  //         productId: product._id,
+  //         poster_details: product,
+  //         materialDimension: mat,
+  //         quantity: quantity,
+  //         total: amount
+  //     }
+  //     let flag = false;
+  //     if (localStorage.getItem("ehsCart")) {
+  //         ehsCart = JSON.parse(localStorage.getItem("ehsCart"));
+  //         const i = ehsCart.findIndex(product => product.productId === finalProduct.productId)
+  //         if (i >= 0) {
+  //             ehsCart[i] = finalProduct;
+  //             flag = true;
+  //             addToCartConfirmPopup();
+  //             setTimeout(() => {
+  //                 window.location.reload(false);
+  //             }, 1000);
+  //         }
+  //     }
+  //     if (flag === false) {
+  //         ehsCart.push(finalProduct)
+  //         addToCartConfirmPopup();
+  //         setTimeout(() => {
+  //             window.location.reload(false);
+  //         }, 1000);
+  //     }
+  //     localStorage.setItem("ehsCart", JSON.stringify(ehsCart));
+
+  // }
+    
+  }
+
+
+
 
   // text part-----------------------------------
   //text editable-----------------------
@@ -1027,7 +1221,7 @@ const DiyHomeOne = () => {
           </button>
           <button
             className="place-order download-pdf-png  btn mb-2"
-            onClick={printDocumentPNG}
+            onClick={addToCart}
           >
             Place order
             <ArrowForwardIosIcon className="arrow" />
