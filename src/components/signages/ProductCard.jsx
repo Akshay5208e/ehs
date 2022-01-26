@@ -804,7 +804,7 @@ const dimensionSelectNew = (e,mat) => {
         <div className=" p-0">
             <div className=" productCardTitle"><Link className=" productCardTitle " to={`/${props.catSlug}/${props.subCatSlug}/product/id=${props.id}`} >{props.name}</Link></div>
             <p className="mb-0 mb-sm-2 mt-1 productCardDetail  ">Starts from Rs. {props.startPrice}<span className="float-right d-flex" style={{color: "#757575" , height: "12px"}}>{props.rating}<StarIcon className="d-none d-sm-inline-block " style={{width: "16px",height: "18px", color: "#F2C94C"}}  /><StarIcon className="d-inline-block d-sm-none mt-0 " style={{width: "12px",height: "12px", color: "#F2C94C"}}  /></span></p>
-            <div className="d-inline-block productCardAddToCart  " role="button" onClick={selectMaterialPopup}>Add to Cart</div>
+            <div className="d-inline-block productCardAddToCart  " role="button" onClick={selectMaterialPopup}>Add toCart </div>
             {/* <span className="productCardDetail2  d-inline-block  mt-2 mt-sm-0">{props.itemBought} bought this</span> */}
             {
                 props.wishlist?
@@ -812,7 +812,7 @@ const dimensionSelectNew = (e,mat) => {
                 <span className="productCardDetail2  d-inline-block  mt-2 mt-sm-0">{props.itemBought} bought this</span>
             }
         </div>
-    </div>
+    </div> 
     );
 };
 

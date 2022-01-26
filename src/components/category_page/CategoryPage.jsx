@@ -31,6 +31,7 @@ const ncard = (val,i) => {
 };
 
 
+
 const ImgBox = (props) => {
   return (
     <div className="  imgBox ">

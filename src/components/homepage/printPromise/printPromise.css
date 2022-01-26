@@ -9,6 +9,9 @@
 .inline{
     display: inline-block;
 }
+.cardImg{
+    width: auto;
+}
 .promiseCard2{
     font-family: 'Source Sans Pro';
     width: 374px;

@@ -991,7 +991,7 @@ const changeDimension = (e) => {
                     */}
                     {catSlug==='posters'?
                     <div className=" coflex-row " >
-                        <p className=" selectHead text-center ">Select Material</p>
+                        <p className=" selectHead text-center " style={{marginTop:"-25px"}}>Select Material</p>
                         {/* product.materialDimension ? (
                             <div className="d-flex justify-content-between mr-0  ">
                             <div className="posterMaterialDimension selected" id="m1" role="button" onClick={changeMaterialTo1} >
@@ -1016,7 +1016,7 @@ const changeDimension = (e) => {
                                         <div clasname="dimension_image_alignment" >
                                             <img src={val.material_img? val.material_img: ""} className="imgDim mx-auto" alt="material"></img>
                                         </div>
-                                        <p className="text-center materialTextDimension  mx-auto my-2 px-2">{ val.material_title ? val.material_title: "No Material"}</p>
+                                        <p className="text-center materialTextDimension  mx-auto  px-2">{ val.material_title ? val.material_title: "No Material"}</p>
                                     </div>
                                 )
                             }): ""
@@ -1024,8 +1024,8 @@ const changeDimension = (e) => {
                         </div>
                     </div>:null}
                     <br/>
-                    <div className=" my-3 mx-auto text-center" >
-                        <p className="selectHead">Select Dimensions</p>
+                    <div className=" my-2 mx-auto text-center" >
+                    <p className="selectHead" style={{marginTop:"-25px"}}>Select Dimensions</p>
                         <div className="mx-auto text-center">
                             {/* <div className=" ml-sm-0 posterMaterialDimension selected" id="d1" role="button" onClick={changeDimensionToS} >
                                 <img src={dimNew? dimNew[0].dimension_img: ""} className="posterDimension1 mt-2" alt="dimension" ></img>
@@ -1149,7 +1149,7 @@ const changeDimension = (e) => {
 
                     </div>
                 </div>
-                <div className="col-lg-4  ">
+                <div className="col-lg-4 details_la ">
                     <div className="d-none d-sm-block " style={{
                     
                     }} >

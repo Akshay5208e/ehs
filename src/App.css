@@ -1752,7 +1752,7 @@ text-align: center;
 }
 .posterDimensionText{
   font-size: 12px;
-  line-height: 14px;
+  /* line-height: 14px; */
   font-weight: 500;
   position: absolute;
   bottom: 0;
@@ -1940,11 +1940,12 @@ line-height: 23px;
   padding-left: 8px!important;
   padding-right: 8px!important;
   }
-  .posterMaterialDimension{
+  /* .posterMaterialDimension{
       width: 55px;
       height: 80px;
       margin-left: 10px;
-  }
+
+  } */
   .selectHead{
     font-size: 14px;
   }

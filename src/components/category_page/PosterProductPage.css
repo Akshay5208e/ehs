@@ -3,19 +3,27 @@
     height: auto;
 }
 .posterMaterialDimension{
-    height: 180px;
+    height: 130px;
     vertical-align: middle;
+
+    
 }
 .dim{
     width: 30%;
 }
 .materialTextDimension, .posterDimensionText{
-    line-height: normal;
+    /* line-height: normal; */
     vertical-align: middle;
 }
+.details_la {
+    margin-top: -10px;
+}
+
 .selectHead{
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
+
+
 }
 @media only screen and (max-width: 500px) {
     .materialTextDimension, .posterDimensionText{

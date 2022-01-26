@@ -30,7 +30,7 @@ const Data = [
 
 const Card = (props) => {
     return (
-        <div className=" m-0 promoCard br-22  ">
+        <div className=" m-1 promoCard br-22  ">
             <img src={props.imgsrc} className="promoCardImg " alt="off" />
             <div className="cardBody mt-2  text-center d-flex flex-column justify-content-between">
                 <div className="cardTitle  text-capitalize mb-0">{props.title}</div>

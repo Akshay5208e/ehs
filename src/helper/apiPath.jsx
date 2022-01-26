@@ -64,6 +64,11 @@ const Dimension = {
   three: "24in by 36in",
 };
 
+const Color = {
+  one: "Red",
+  two: "Yellow",
+  three: "Custom",
+};
 const findMat = (mat) => {
   if (mat.one) return Material.one;
   else if (mat.two) return Material.two;
@@ -74,6 +79,11 @@ const findDim = (dim) => {
   if (dim.one) return Dimension.one;
   else if (dim.two) return Dimension.two;
   else if (dim.three) return Dimension.three;
+};
+const findCol = (col) => {
+  if (col.one) return Color.one;
+  else if (col.two) return Color.two;
+  else if (col.three) return Color.three;
 };
 
 function buildFormData(formData, data, parentKey) {
@@ -148,5 +158,6 @@ export {
   config,
   findMat,
   findDim,
+  findCol,
   jsonToFormData,
 };

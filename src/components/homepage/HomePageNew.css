@@ -26,9 +26,12 @@
     height: 546px;
 
 }
-#Rectangle_68_ke{
-    width: 122.73px;
-    height: 120.19px;
+.image_container_category{
+width:100%;
+}
+.Rectangle_68_ke{
+    width: 120px;
+    height: 110px;
     border-radius: 20px;
     border: 2px solid #fff;
     box-shadow: inset 3px 3px 14px 0px #C7C7C7;
@@ -39,6 +42,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 1px ;
 }
 .tagText{
     font-family: "Source Sans Pro";

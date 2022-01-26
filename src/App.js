@@ -118,6 +118,9 @@ function App(props) {
             <Route exact path="/about">
               <About />
             </Route>
+            <Route exact path="/campaigns">
+              <Campaigns />
+            </Route>
 
             {/* <Route exact path="/resources" component={ResourceMainPage} />
           <Route exact path="/:name" component={DetailedArticle} /> */}
