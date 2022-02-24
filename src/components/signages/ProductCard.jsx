@@ -15,6 +15,8 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Axios from "axios";
 import {API} from "../../backend";
+import './ProductCard.css'
+import cart from "../../images/cart.png"
 const MySwal = withReactContent(Swal);
 
 
@@ -798,18 +800,27 @@ const dimensionSelectNew = (e,mat) => {
 
     return(
     <div className="productCardBox">
-        <Link  to={`/${props.catSlug}/${props.subCatSlug}/product/id=${props.id}`}  >
+       
+            <div className="productCardImgBox">
+            <img src ={cart} onClick={selectMaterialPopup} className="cart_div d-block" style={{zIndex:"10000"}}/>
+            <Link  to={`/${props.catSlug}/${props.subCatSlug}/product/id=${props.id}`}  >
+            
             <img src={props.product.imgUrl[0] ? props.product.imgUrl[0]:"https://dummyimage.com/400x400/003459/fff.png&text=No+Image+Available" } className="" alt="productImage" className="productCardImg"/>
-        </Link>
-        <div className=" p-0">
+            </Link>
+            
+            </div>
+        
+       
+        <div className="p-2  detailsDiv " >
             <div className=" productCardTitle"><Link className=" productCardTitle " to={`/${props.catSlug}/${props.subCatSlug}/product/id=${props.id}`} >{props.name}</Link></div>
-            <p className="mb-0 mb-sm-2 mt-1 productCardDetail  ">Starts from Rs. {props.startPrice}<span className="float-right d-flex" style={{color: "#757575" , height: "12px"}}>{props.rating}<StarIcon className="d-none d-sm-inline-block " style={{width: "16px",height: "18px", color: "#F2C94C"}}  /><StarIcon className="d-inline-block d-sm-none mt-0 " style={{width: "12px",height: "12px", color: "#F2C94C"}}  /></span></p>
-            <div className="d-inline-block productCardAddToCart  " role="button" onClick={selectMaterialPopup}>Add toCart </div>
+            <p className="mb-0 mb-sm-2 mt-1 productCardDetail  "> From ₹{props.startPrice}<span className="float-right d-flex" style={{color: "#757575" , height: "12px"}}>{props.rating}<StarIcon className="d-none d-sm-inline-block " style={{width: "16px",height: "18px", color: "#F2C94C", marginTop:"-4px"}}  /><StarIcon className="d-inline-block d-sm-none mt-0 " style={{width: "12px",height: "12px", color: "#F2C94C"}}  /></span></p>
+            {/* <div className="d-inline-block productCardAddToCart  " role="button" onClick={selectMaterialPopup}>Add toCart </div> */}
             {/* <span className="productCardDetail2  d-inline-block  mt-2 mt-sm-0">{props.itemBought} bought this</span> */}
             {
                 props.wishlist?
                 <span onClick={removeFromWishlist} role="button" className="productCardDetail2  d-inline-block  mt-2 mt-sm-0">Remove from Wishlist</span>:
-                <span className="productCardDetail2  d-inline-block  mt-2 mt-sm-0">{props.itemBought} bought this</span>
+                ""
+                // <span className="productCardDetail2  d-inline-block  mt-2 mt-sm-0">{props.itemBought} bought this</span>
             }
         </div>
     </div> 

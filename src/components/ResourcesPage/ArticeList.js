@@ -8,7 +8,7 @@ const ArticleList = ({articles}) => {
             <div key={index} className = "p-1 col-sm-6 my-2 inline mx-auto"> 
                 <div className = "card myborder" style={{borderRadius:"20px"}} >
                     <div className="text-decoration-none">
-                    <img src={article.thumbnail} alt="image" className="card-img-top p-1" />
+                    <img src={article.thumbnail} alt="image" className="card-img-top p-1 card_image1" />
                     </div>
                     <div className="bg-light card-body" style={{borderRadius:" 0 0 20px 20px"}}>
                         <div className="text-decoration-none" >

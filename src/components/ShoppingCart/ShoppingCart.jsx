@@ -444,7 +444,7 @@ const Tables = (props) => {
                        <td className="mr-0 px-0 d-flex justify-content-between border-none shoppingCartProduct" >
                               <div>
                                 <img
-                                  src={v.poster_details.imgUrl ? v.poster_details.imgUrl[0] : "https://dummyimage.com/400x400/003459/fff.png&text=No+Image+Available"}
+                                  src={v.poster_details.imgUrl ? (v.poster_details.imgUrl || v.poster_details.imgUrl[0]) : "https://dummyimage.com/400x400/003459/fff.png&text=No+Image+Available"}
                                   className="productImgInCart"
                                   alt={v.poster_details.slug ? v.poster_details.slug : "-"}
                                 />

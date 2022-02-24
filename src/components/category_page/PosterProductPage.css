@@ -1,6 +1,12 @@
 .imgDim{
-    width: 90%;
-    height: auto;
+    width: 50%;
+    height: 50%;
+    margin-bottom: 10px;
+    
+}
+.imgDim1{
+    width: 40%;
+    height: 40%;
 }
 .posterMaterialDimension{
     height: 130px;
@@ -8,12 +14,17 @@
 
     
 }
+
+
 .dim{
     width: 30%;
 }
-.materialTextDimension, .posterDimensionText{
-    /* line-height: normal; */
-    vertical-align: middle;
+
+.materialTextDimension{
+   justify-content: center;
+   align-items: center;
+   vertical-align: text-bottom;
+  
 }
 .details_la {
     margin-top: -10px;
@@ -28,5 +39,6 @@
 @media only screen and (max-width: 500px) {
     .materialTextDimension, .posterDimensionText{
         font-size: 13px;
+        line-height: none;
     }
 }

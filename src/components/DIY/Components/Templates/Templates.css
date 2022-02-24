@@ -16,6 +16,8 @@
     height: 500px;
     width: auto;
     padding: 0px 12px 12px 15px;
+    margin-left: -75px;
+    margin-top: -20px;
   }
   /* width */
   .image-map-container::-webkit-scrollbar {

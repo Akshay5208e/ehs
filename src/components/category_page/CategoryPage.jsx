@@ -47,6 +47,18 @@ const ImgBox = (props) => {
     </div>
   );
 };
+const Card1 = (props) => {
+  return(
+    <Link to={`/${props.catSlug}/subcat/bestsellers`} style={{textDecorationLine: "none"}}>
+      <div className="br-22 bestsellerCard d-flex flex-column justify-content-start">
+          <img src={props.src} className="br-22 bestsellerImg"  />
+          {/* <img src= "https://dummyimage.com/400x400/003459/fff.png&text=No+Image+Available" className="br-22 bestsellerImg"  />  */}
+         
+          <p className="bestsellerText  mb-0 px-2">{props.title}</p>
+      </div>
+      </Link>
+  )
+};
 
 const CategoryPage = (props) => {
   const {catSlug} = useParams();
@@ -229,10 +241,11 @@ const CategoryPage = (props) => {
           </div>
           <Carousel className="px-2 px-sm-0" pagination={false}  breakPoints={breakPointsBestseller}  showArrows={false} ref={bestseller} style={{opacity: "1!important"}} 
           >
-              <div className="active"  id="carouselItem2">
+              <div className="active1"  id="carouselItem2">
                 {bestSeller && bestSeller.slice(0,4).map((val,i) => {
                                           return (
-                                              <ImgBox src={val.imgUrl[0]} title={val.name} catSlug={catSlug} key={i} />
+                                              //<ImgBox src={val.imgUrl[0]} title={val.name} catSlug={catSlug} key={i} />
+                                              <Card1 src={val.imgUrl[0]} title={val.name} catSlug={catSlug} key={i}/>
                                           );
                                         })}
               </div>
@@ -240,7 +253,8 @@ const CategoryPage = (props) => {
               <div id="carouselItem2" className="">
                 { bestSeller && bestSeller.slice(4,8).map((val,i) => {
                                           return (
-                                              <ImgBox src={val.imgUrl[0]} title={val.name} catSlug={catSlug} key={i} />
+                                             // <ImgBox src={val.imgUrl[0]} title={val.name} catSlug={catSlug} key={i} />
+                                             <Card1 src={val.imgUrl[0]} title={val.name} catSlug={catSlug} key={i}/>
                                           );
                                         })}
               </div>

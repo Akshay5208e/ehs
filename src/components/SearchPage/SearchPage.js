@@ -19,33 +19,22 @@ function SearchPage() {
     
     return (
         <div className='container main_container text-center mx-auto' >
+          <div className='row button_style mx-auto'>
 
-            <div id="carouselExampleControls" class=" button-container carousel slide mb-4" data-ride="carousel" >
-            <div class="carousel-inner">
-              <div class="carousel-item active w-100 row h-auto mx-auto" data-interval="10000">
-                <button onClick={()=>setActive("first")} className='responsiveMargin inlineBlock'>Posters</button>
-                <br className='visibleOnSmall'/>
-                <button onClick={()=>setActive("second")} className=' responsiveMargin inlineBlock'>Signages</button>
-              </div>
-              <div class="carousel-item w-100 h-auto " data-interval="10000">
-                <button onClick={()=>setActive("third")} className='responsiveMargin inlineBlock'>FloorGraphics</button>
-                <br className='visibleOnSmall'/>
-                <button onClick={()=>setActive("fourth")} className='responsiveMargin inlineBlock'>AssetMarkings</button>
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span className='ArrowBorder'>
-              <FontAwesomeIcon icon={faAngleLeft} className='carousel-control-prev-icon'/>
-              <span class="sr-only">Previous</span>
-              </span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span className='ArrowBorder'>
-            <FontAwesomeIcon icon={faAngleRight} className='carousel-control-next-icon'/>
-            <span class="sr-only">Next</span>
-            </span>
-            </a>
+            <div className='col-md-3 col-xs-6'> <button onClick={()=>setActive("first")} className=' inlineBlock '>Posters</button></div>
+            <div className='col-md-3 col-xs-6'> <button onClick={()=>setActive("second")} className=' inlineBlock '>Signages</button></div>
+            <div className='col-md-3 col-xs-6'> <button onClick={()=>setActive("third")} className=' inlineBlock ' >FloorGraphics</button></div>
+            <div className='col-md-3 col-xs-6'><button onClick={()=>setActive("fourth")} className=' inlineBlock '>AssetMarkings</button></div>
+              
+                
+                
+               
+            
+               
           </div>
+              
+            
+          
 
             <div className='results_container'>
 

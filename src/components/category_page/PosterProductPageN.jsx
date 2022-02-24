@@ -574,6 +574,7 @@ const changeMaterial = (e)=> {
     calculateAmount();
 }
 
+
 const changeDimension = (e) => {
     setDim(e.target.innerText);
     const m = document.getElementsByClassName("dim");
@@ -1016,7 +1017,9 @@ const changeDimension = (e) => {
                                         <div clasname="dimension_image_alignment" >
                                             <img src={val.material_img? val.material_img: ""} className="imgDim mx-auto" alt="material"></img>
                                         </div>
-                                        <p className="text-center materialTextDimension  mx-auto  px-2">{ val.material_title ? val.material_title: "No Material"}</p>
+                                        
+                                        <p className="text-center  materialTextDimension mx-auto  px-2">{ val.material_title ? val.material_title: "No Material"}</p>
+                                         
                                     </div>
                                 )
                             }): ""
@@ -1042,9 +1045,9 @@ const changeDimension = (e) => {
                             {
                                 dimNew ? dimNew.map((val,i)=>{
                                     return(
-                                        <div className="posterMaterialDimension inline mx-1 dim text-center" role="button" id="d2" onClick={(e)=>changeDimension(e)}>
+                                        <div className="posterMaterialDimension1 inline mx-1 dim text-center" role="button" id="d2" onClick={(e)=>changeDimension(e)}>
                                              <div clasname="dimension_image_alignment" >
-                                            <img src={val.dimension_img? val.dimension_img: ""} className="posterDimension2 mt-2 imgDim" alt="dimension" style={{
+                                            <img src={val.dimension_img? val.dimension_img: ""} className="posterDimension2 mt-2 imgDim1" alt="dimension" style={{
                                                 marginLeft:0,
                                             }}></img>
                                             </div>
@@ -1682,21 +1685,21 @@ const changeDimension = (e) => {
                            // console.log(ncard);
                             return(
                             <ProductCard 
-                                    product={ncard}
-                                    src={ncard.imgUrl[0] ? ncard.imgUrl[0] : ""} 
-                                    name={ncard.name ? ncard.name : ""} 
-                                    slug={ncard.slug ? ncard.slug : ""} 
-                                    startPrice={ ncard.originalPrice ? ncard.originalPrice : ""} 
-                                    rating={ncard.average_rating ? ncard.average_rating : ""} 
-                                    itemBought={ncard.bought ? ncard.bought : ""} 
-                                    catName={catName ? catName : ""} 
-                                    subCatName={subCatName ? subCatName : ""}  
-                                    catId= { ncard.category.length>0 ? ncard.category[0]._id : "" } 
-                                    subCatId={ ncard.subCategory.lenght>0 ? ncard.subCategory[0]._id : ""}
-                                    catSlug = { ncard.category.length>0 ? ncard.category[0].cat_slug : "" }
-                                    subCatSlug = {ncard.subCategory.lenght>0 ? ncard.subCategory[0].sub_cat_slug : ""}
-                                    id={ncard._id ? ncard._id : ""} 
-                                    key={i} 
+                            product={ncard}
+                            src={ncard.imgUrl[0]}
+                            name={ncard.name}
+                            slug={ncard.slug}
+                            startPrice={ncard.originalPrice}
+                            rating={ncard.average_rating}
+                            itemBought={ncard.bought}
+                            catName={catName}
+                            subCatName={subCatName}
+                            catId={ncard.category[0]._id}
+                            subCatId={ncard.subCategory[0]._id}
+                            catSlug={ncard.category[0].cat_slug}
+                            subCatSlug={ncard.subCategory[0].sub_cat_slug}
+                            id={ncard._id}
+                            key={i}
                                 />
                             )
                         })}
@@ -1708,21 +1711,21 @@ const changeDimension = (e) => {
 
                         return (
                             <ProductCard
-                                product={ncard}
-                                src={ncard.imgUrl[0]}
-                                name={ncard.name}
-                                slug={ncard.slug}
-                                startPrice={ncard.originalPrice}
-                                rating={ncard.average_rating}
-                                itemBought={ncard.bought}
-                                catName={catName}
-                                catId={ncard.category[0] ? ncard.category[0]._id : ""}
-                                subCatId={ncard.subCategory[0] ? ncard.subCategory[0]._id : ""}
-                                catSlug={ncard.category[0] ? ncard.category[0].cat_slug : ""}
-                                subCatSlug={ncard.subCategory[0] ? ncard.subCategory[0].sub_cat_slug : ""}
-                                subCatName={subCatName}
-                                id={ncard._id}
-                                key={i}
+                            product={ncard}
+                            src={ncard.imgUrl[0]}
+                            name={ncard.name}
+                            slug={ncard.slug}
+                            startPrice={ncard.originalPrice}
+                            rating={ncard.average_rating}
+                            itemBought={ncard.bought}
+                            catName={catName}
+                            subCatName={subCatName}
+                            catId={ncard.category[0]._id}
+                            subCatId={ncard.subCategory[0]._id}
+                            catSlug={ncard.category[0].cat_slug}
+                            subCatSlug={ncard.subCategory[0].sub_cat_slug}
+                            id={ncard._id}
+                            key={i}
                             />
                         )
                     })}

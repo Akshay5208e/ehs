@@ -5,20 +5,25 @@ import ArticleList from './ArticeList'
 const DetailedArticle = ({match}) => {
     const name = match.params.name;
     const article = ArticleData.find((article) => article.name === name);
-    console.log(article)
+    
    
     return (
         <div className='text-center'>
-            <div className="p-2 col-md-9 mx-auto article">
+            {article&& <>
+                <div className="p-2 col-md-9 mx-auto article">
+                
                 <h1 className= "text-color my-2">{article.title}</h1>
                 <div className="text-primary text-decoration-none">
-                    <img src={article.thumbnail} alt="blog" className="card-img-top my-2" />
+                    <img src={article.thumbnail} alt="blog" className="card-img-top my-2 card_image" />
                 </div>
                 {article.content.map ((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
                 ))}
                 <a href="./resources" className='btn btn-outline-primary' style={{width:"10%"}}>Back to list</a>
             </div>
+            </>}
+           
+            
         </div>
     )
 }

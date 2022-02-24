@@ -21,6 +21,11 @@ import signagesTag from "../../images/Group_100.png";
 import floorTag from "../../images/Group_101.png";
 import assetTag from "../../images/Group_102.png";
 import { Link } from "react-router-dom";
+import poster from "../../images/posters.png"
+import signages from "../../images/signages.png"
+import fg from "../../images/fg.png"
+import as from "../../images/as.png"
+
 
 const HomePage = (props) => {
   const [authUser, setAuthUser] = React.useState("");
@@ -35,34 +40,34 @@ const HomePage = (props) => {
    const screenWidth = window.innerWidth;
   return (
     <>
-        <div className="padding-10 d-flex justify-content-between mb-4  mt-4">
+        <div className="padding-10 d-flex justify-content-between mb-4  mt-4 ">
             <div className="">
                 <p className="taglineN">The Best Environment, Health and Safety Prints for your Workplace</p>
-                <div className="d-lg-block d-none" >
+                <div className="d-lg-block d-none" style={{marginRight:"20px"}} >
                     <p className="taglineN1">What would you like to order today</p>
                     <div className="d-flex flex-row  justify-content-between">
                         <Link to="/cat/posters" className="tagHome">
                         <div className="Rectangle_68_ke" id="Rectangle_68_ke">
-                            <img src={posterTag} alt="poster" className="" />
-                            <p className="tagText mb-0">Posters</p>
+                            <img src={poster} alt="poster" className="" />
+                           
                         </div>
                         </Link>
                         <Link to="/cat/signages" className="tagHome">
                         <div className="Rectangle_68_ke" id="Rectangle_68_ke">
-                            <img src={signagesTag} alt="poster" className="" />
-                            <p className="tagText mb-0">Signages</p>
+                            <img src={signages} alt="poster" className="" />
+                            
                         </div>
                         </Link>
                         <Link to="/cat/floor-graphics" className="tagHome">
                         <div className="Rectangle_68_ke" id="Rectangle_68_ke">
-                            <img src={floorTag} alt="poster" className="" />
-                            <p className="tagText mb-0">Floor Graphics</p>
+                            <img src={fg} alt="poster" className="" />
+                            
                         </div>
                         </Link>
                         <Link to="/cat/asset-markings" className="tagHome">
                         <div className="Rectangle_68_ke" id="Rectangle_68_ke">
-                            <img src={assetTag} alt="poster" className="" />
-                            <p className="tagText mb-0">Asset Markings</p>
+                            <img src={as} alt="poster" className="" />
+                            
                         </div>
                         </Link>
                         
@@ -73,31 +78,31 @@ const HomePage = (props) => {
                 <img src={homepagePoster} className="homepagePoster" />
             </div>
         </div>
-        <div className="padding-10 mt-2 d-block d-lg-none mb-4 " >
+        <div className="padding-10 mt-2 d-block d-lg-none  mb-4 mx-2  " >
                     <p className="taglineN1">What would you like to order today</p>
-                    <div className="d-flex flex-row  justify-content-between">
+                    <div className="d-flex flex-row  justify-content-between " style={{marginLeft:"-20px"}}>
                         <Link to="/cat/posters" className="tagHome mx-2">
                         <div className="Rectangle_68_ke" id="Rectangle_68_ke">
-                            <img src={posterTag} alt="poster" className="tagImgP" />
-                            <p className="tagText mb-0">Posters</p>
+                            <img src={poster} alt="poster" className="tagImgP" />
+                            
                         </div>
                         </Link>
                         <Link to="/cat/signages" className="tagHome">
                         <div className="Rectangle_68_ke" id="Rectangle_68_ke">
-                            <img src={signagesTag} alt="poster" className="tagImg" />
-                            <p className="tagText mb-0">Signages</p>
+                            <img src={signages} alt="poster" className="tagImg" />
+                            
                         </div>
                         </Link>
                         <Link to="/cat/floor-graphics" className="tagHome">
                         <div className="Rectangle_68_ke" id="Rectangle_68_ke">
-                            <img src={floorTag} alt="poster" className="tagImgD" />
-                            <p className="tagText mb-0">Floor Graphics</p>
+                            <img src={fg} alt="poster" className="tagImgD" />
+                         
                         </div>
                         </Link>
                         <Link to="/cat/asset-markings" className="tagHome">
-                        <div className="Rectangle_68_ke" id="Rectangle_68_ke">
-                            <img src={assetTag} alt="poster" className="tagImgD" />
-                            <p className="tagText mb-0">Asset Markings</p>
+                        <div className="Rectangle_68_ke " id="Rectangle_68_ke">
+                            <img src={as} alt="poster" className="tagImgD" />
+                            
                         </div>
                         </Link>
                        

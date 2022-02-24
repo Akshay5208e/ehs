@@ -12,6 +12,10 @@
 .width{
   width: 100%;
 }
+.signin_button{
+  height: 45px;
+  width: auto;
+}
 
 .textColorAndWeight {
   font-family: "Open Sans";
@@ -76,7 +80,7 @@
   border-left: none;
   height: 35px;
   margin-top: 0px;
-  width: 470px;
+  width: 100%;
   margin-right: 5px;
 }
 .searchBarInput:focus{
@@ -141,14 +145,23 @@
     
   }
   .searchBarInput{
-    width: 100%;
+    width: 90%;
     font-family: "Source Sans Pro";
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
     line-height: 14px;
     margin-right: 0;
+    border-radius: 0 5px 5px 0;
   }
+  .search_icon
+  {
+    border-radius: 5px 0 0 5px;
+  }
+  #dropdownMenuButton{
+    display: none;
+  }
+  
    #searchDropCatId{
     display: block!important;
     -webkit-transform: translate(0%);

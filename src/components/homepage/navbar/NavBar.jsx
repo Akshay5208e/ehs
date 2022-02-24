@@ -13,6 +13,7 @@ import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounde
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuIcon from '@material-ui/icons/Menu';
+import signin from "../../../images/signinButton.png"
 import { Person, PersonOutline } from "@material-ui/icons";
 import { UserContext } from "../../../firebase/userContext";
 import { SearchContext } from "../../SearchPage/SearchContext";
@@ -342,7 +343,7 @@ const NavBar = (props) => {
                 {searchCat}
               </button>
               <div
-                className="px-sm-2 pb-sm-2 pt-sm-1 dropdown-item dropdown-content animate__animated animate__faster"
+                className="px-sm-2 pb-sm-2 pt-sm-1 dropdown-item dropdown-content animate__animated animate__faster D_Dropdown"
                 id="searchDropCatId" 
                 >
                 {search_catogories && search_catogories.map((v, i) =>
@@ -375,7 +376,7 @@ const NavBar = (props) => {
               </div>
             </div>
               <SearchIcon
-                className="pl-3 bg-white d-none d-sm-block"
+                className="pl-3 bg-white  d-sm-block search_icon"
                 aria-hidden="true"
                 style={{ color: "grey", height: "35px",width: "40px", borderTop: "1px solid #757575",borderBottom: "1px solid #757575" }}
                 />
@@ -383,14 +384,14 @@ const NavBar = (props) => {
             <Link to ="/searchPage" className="width"> 
             <input
               type="text"
-              className="form-control bg-white shadow-none searchBarInput w-100"
+              className="form-control bg-white shadow-none searchBarInput w-100 d-inline-block "
               placeholder="Search for posters, signages and more"
               onChange={getSearch}
               />
             </Link>
          
           </div>
-          <button className="d-block d-sm-none float-right ml-auto mt-2" style={{
+          {/* <button className="d-block d-sm-none float-right ml-auto mt-2" style={{
             width: "100px",
             height: "35px",
             border: "1px solid #F2994A",
@@ -407,7 +408,7 @@ const NavBar = (props) => {
             background: "transparent",
           }}
           onClick={searchIcon}
-          >Search</button>
+          >Search</button> */}
          <div
               className="nav-item d-none d-lg-flex  mx-auto "
               style={{
@@ -439,21 +440,7 @@ const NavBar = (props) => {
                       padding: '2px',
                     }}
                     >
-                    Login
-                  </Link>{" "}
-                  |{" "} 
-                  <Link
-                    to="/signup"
-                    className=" textColorAndWeight text-decoration-none"
-                    style={{
-                      display: 'flex',
-                      alignItems:'center',
-                      color: "#ffffff",
-                      padding: '2px',
-                      
-                    }}
-                    >
-                  Register
+                    <img src ={signin} className="signin_button"/>
                   </Link>
                 </>
               )}
@@ -495,6 +482,7 @@ const NavBar = (props) => {
       <nav className="navbar navbar-expand-sm mt-0  pt-0 pb-0 pb-sm-2 " id="navbarContainer">
         <div className="collapse navbar-collapse animate__animated animate__faster  " id="navbarNav">
           <ul className="navbar-nav  d-flex justify-content-between " style={{width: "100%"}}>
+          
             <li className="nav-item mb-0  mt-5 mt-sm-0">
               <div className="dropdown">
                 <Link
@@ -714,7 +702,33 @@ const NavBar = (props) => {
             </div> */}
            
             <div className="nav-item mt-auto d-block d-sm-none" >
-            <li
+             
+
+           
+            {(authUser || currentUser)  ?
+            
+            currentUser?
+
+            (
+              <>
+               <div className="divider"></div>
+              
+                <Link to ="/dashboard"  className="nav-link text-white textColorAndWeight btn shadow-none border-0"><li>My Orders</li></Link>
+              <Link to ="/dashboard"  className="nav-link text-white textColorAndWeight btn shadow-none border-0"><li>My WishList</li></Link>
+              <Link to ="/cart"  className="nav-link text-white textColorAndWeight btn shadow-none border-0"><li>My Cart</li></Link>
+              <Link to ="/dashboard"  className="nav-link text-white textColorAndWeight btn shadow-none border-0"><li>My Account</li></Link>
+              </>
+            ) :(
+              <>
+              <Link to ="/dashboard"  className="nav-link text-white textColorAndWeight btn shadow-none border-0"><li>My Orders</li></Link>
+              <Link to ="/dashboard"  className="nav-link text-white textColorAndWeight btn shadow-none border-0"><li>My WishList</li></Link>
+              <Link to ="/cart"  className="nav-link text-white textColorAndWeight btn shadow-none border-0"><li>My Cart</li></Link>
+              <Link to ="/dashboard"  className="nav-link text-white textColorAndWeight btn shadow-none border-0"><li>My Account</li></Link>
+            
+              </>
+            ) : (
+              <>
+                <li
               className="nav-item ml-4 mt-5 menuRemove"
               style={{
                 marginTop: "2px",
@@ -723,74 +737,17 @@ const NavBar = (props) => {
                 color: "#F2994A",
               }}
             >
-              {(authUser || currentUser) ? 
               
-              currentUser?(
-                <p
-                  className="text-white textColorAndWeight text-decoration-none"
-                  style={{ marginTop: "13px" }}
-                >
-                  {currentUser.displayName}
-                </p>
-              ):
-              (
-                <p
-                  className="text-white textColorAndWeight text-decoration-none"
-                  style={{ marginTop: "13px" }}
-                >
-                  {authUser.includes("@") ? authUser.split("@")[0] : authUser}
-                </p>
-              ) : (
                 <>
                   <Link
                     to="/login"
                     className=" textColorAndWeight text-decoration-none" onClick={hamburger}
                   >
-                    Login
-                  </Link>{" "}
-                  |{" "}
-                  <Link
-                    to="/signup"
-                    className=" textColorAndWeight text-decoration-none" onClick={hamburger}
-                  >
-                    Register
+                    SignIn
                   </Link>
-                </>
-              )}
+                  </>
+              
             </li>
-            {(authUser || currentUser)  ?
-            
-            currentUser?
-
-            (
-              <>
-                <li className="nav-item ml-4">
-                  <Link
-                    to="/dashboard"
-                    className="nav-link text-white textColorAndWeight btn shadow-none border-0"
-                    style={{ backgroundColor: "#003459", border: "0px" }}
-                  >
-                    Profile
-                  </Link>
-                </li>
-              </>
-            ) :(
-              <>
-                <li className="nav-item ml-4">
-                  <Link
-                    to="/dashboard"
-                    className="nav-link text-white textColorAndWeight btn shadow-none border-0"
-                    style={{ backgroundColor: "#003459", border: "0px" }}
-                  >
-                    Profile
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="nav-item ml-4">
-                  <p>{"                   "}</p>
-                </li>
               </>
             )}
               </div>

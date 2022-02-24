@@ -4,7 +4,7 @@
     border-radius: 0px;
     
 }
-.button-container button{
+.button_style button{
     font-size: 100%;
     display: inline-block;
     padding: 8px 25px;
@@ -15,7 +15,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
- .carousel-item button:hover{
+ .button_style button:hover{
     background-color: lightblue;
     color: rgb(15, 134, 214);
     border-color: rgb(15, 134, 214);

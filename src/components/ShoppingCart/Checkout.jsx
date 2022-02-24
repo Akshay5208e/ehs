@@ -259,7 +259,7 @@ const { register: register2, handleSubmit: handleSubmit2} = useForm({
        setSelectedAddress(address);
       // console.log(e)
        //console.log(address);
-        let add = document.getElementsByclassName("selectAddress");
+        let add = document.getElementsByClassName("selectAddress");
         for(let i=0;i<add.length;i++){
             add[i].style.border = "2px solid #D2D2D2";
         }
@@ -427,7 +427,7 @@ const { register: register2, handleSubmit: handleSubmit2} = useForm({
                     {address && address.length>0 ? (
                         <>
                         <div className="checkoutAddressBox ">
-                      
+                       
                       { 
                           address.map((val,i)=>{
                               

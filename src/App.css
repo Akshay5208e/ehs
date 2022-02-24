@@ -1539,7 +1539,7 @@ text-align: left;
   margin-right: 20px;
   opacity: 0.5;
 }
- .active{
+ .active1{
   opacity: 1;
 }
 .productCarouselImg{
@@ -1705,6 +1705,16 @@ margin-top: 10px;
   position: relative;
   align-items: center;
 }
+.posterMaterialDimension1{
+  width: 95px;
+  height: 110px;
+  padding-top: 1px;
+  border: 2px solid #D2D2D2;
+  border-radius: 6px;
+  box-sizing: border-box;
+  position: relative;
+  align-items: center;
+}
 .image_alignment{
   align-items: center;
 }
@@ -1712,6 +1722,9 @@ margin-top: 10px;
 text-align: center;
 }
 .posterMaterialDimension>*{
+  pointer-events: none;
+}
+.posterMaterialDimension1>*{
   pointer-events: none;
 }
 .selected{
@@ -1732,11 +1745,12 @@ text-align: center;
   
 }
 .materialTextDimension{
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 11px;
+  /* margin-top: 160px; */
   font-weight: 500;
-  position: absolute;
+  position: relative;
   bottom: 0;
+  line-height: 11px;
 }
 .posterDimension1{
   width: 40px;
@@ -1752,10 +1766,11 @@ text-align: center;
 }
 .posterDimensionText{
   font-size: 12px;
-  /* line-height: 14px; */
+  line-height: 18px; 
   font-weight: 500;
-  position: absolute;
+  position: relative;
   bottom: 0;
+
 }
 .paginationActive{
   opacity: 1;
@@ -1959,7 +1974,7 @@ line-height: 23px;
   }
   .materialTextDimension{
     font-size: 7px;
-    line-height: 8px;
+    line-height: 12px;
     font-weight: 600;
     
   }
@@ -1977,7 +1992,7 @@ line-height: 23px;
   }
   .posterDimensionText{
     font-size: 10px;
-    line-height: 8px;
+    line-height: 17px;
     
   }
 }
@@ -2357,7 +2372,7 @@ padding: 2px;
   height: 75px;
 }
 .popupMaterialImg2{
-  width: 92px;
+  width:50%;
 }
 .popupDimensionImg1{
   width: 52px;

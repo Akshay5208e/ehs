@@ -21,7 +21,9 @@
     margin-bottom: 0 !important;
    
 }
-
+.text-container-body{
+    margin-left: -60px;
+}
 
 .text-h4{
     height: 60px;

@@ -28,3 +28,11 @@
 .card-text{
     color: grey;
 }
+.card_image {
+    height: 200px;
+    width: 160px;
+}
+.card_image1{
+    height: 250px;
+    width:200px;
+}

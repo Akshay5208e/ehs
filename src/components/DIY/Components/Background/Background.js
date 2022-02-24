@@ -70,7 +70,7 @@ const Background = ({ setColor, handleLogAndImgChange }) => {
         </div>
         <hr className="background-hr" />
         <div className="mt-4">
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center background1">
             <CirclePicker
               // color={color}
               onChangeComplete={(updateColor2) => setColor(updateColor2.hex)}
@@ -79,7 +79,7 @@ const Background = ({ setColor, handleLogAndImgChange }) => {
           <hr className="background-hr" />
         </div>
 
-        <div>
+        <div className="background2">
           <div className="background-upload">
             <div>
               <p className="mb-4 text-center">Upload your Brand Logo</p>

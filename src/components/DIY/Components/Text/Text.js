@@ -280,7 +280,7 @@ const Text = ({
       {languageOption && (
         <div>
           <div className="text-container-body">
-            <div className=" ">
+            <div className="text_adding ">
               <button
                 className="btn text-header-title text-h4"
                 onClick={enableHeaderText}

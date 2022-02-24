@@ -1,10 +1,12 @@
 /* -----------------------diy-container-pictograms----------------------- */
 .diy-container-pictograms{
-    height: 602px;
-    width: 524px;
+    height: 565px;
+  
     background: #003459;
     border-radius: 0 16px 16px 0;
+    width: 1624px;
     z-index: 10;
+    margin-top: 15px;
     /* position: relative; */
     /* text-align: center; */
     /* transition: 0.3s all cubic-bezier(0.22, 0.61, 0.36, 1); */
@@ -13,8 +15,10 @@
     font-weight: bold;
     text-transform: uppercase;
     color: #fff;
-    margin-bottom: 0 !important;
-    margin-left: 20px;
+    margin-bottom: 15px !important; 
+    margin-left: -75px;
+    margin-top: -20px;
+    
    }
    .pictograms-button-group{
     align-items: center;
@@ -84,4 +88,5 @@
     height: 325px;
     width: auto;
     padding: 0px 12px 0px 15px;
+    margin-left: -75px;
 }

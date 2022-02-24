@@ -7,7 +7,8 @@ import { SearchContext } from './SearchContext';
 const Card = (props) => {
     return(
         <div className="br-22 bestsellerCard justify-content-start m-2" style={{display:"inline-block"}}>
-            <img src={props.imgUrl} className="br-22 bestsellerImg"  />
+            {/* <img src={props.imgUrl} className="br-22 bestsellerImg"  /> */}
+            <img src= "https://dummyimage.com/400x400/003459/fff.png&text=No+Image+Available" className="br-22 bestsellerImg"  /> 
             <p className="bestsellerText  mb-0 px-2">{props.title}</p>
         </div>
     )

@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import HomePage from "./components/homepage/HomePageNew.jsx";
 import Search from "./components/Search/Search";
 import Category from "./components/category_page/CategoryPage.jsx";
-import ProductList2 from "./components/product_list2/ProductList2.jsx";
+
 import NavBar from "./components/homepage/navbar/NavBar";
 import ProductDescription from "./components/productdescription/ProductDescription";
 import { useLocation, BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -43,6 +43,7 @@ import DiyHome from "./components/DIY/Components/DiyHome/DiyHome";
 import DetailedArticle from "./components/ResourcesPage/DetailedArticle"
 import SearchPage from "./components/SearchPage/SearchPage";
 import ResourceMainPage from "./components/ResourcesPage/ResourceMainPage";
+import ProductList2 from "./components/product_list2/ProductList2.jsx";
 
 const  ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -122,12 +123,18 @@ function App(props) {
               <Campaigns />
             </Route>
 
-            {/* <Route exact path="/resources" component={ResourceMainPage} />
-          <Route exact path="/:name" component={DetailedArticle} /> */}
-            
             <Route exact path="/DIY">
               <DiyHome />
             </Route>
+           
+            
+          {/* <Route exact path="/resources">
+              <ResourceMainPage/>
+            </Route>
+            
+            <Route exact path="/:name" component={DetailedArticle}/>
+               */}
+           
             
 
             <Route exact path="/track">
@@ -203,7 +210,7 @@ function App(props) {
               />
             </Route>
             
-            <Route path="/cart">
+            <Route exact path="/cart">
               <Cart
                 setCartCount={setCartCount}
                 navCount={cartCount}

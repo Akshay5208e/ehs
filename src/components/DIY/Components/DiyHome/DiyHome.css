@@ -12,7 +12,7 @@
   }
   /* .diy-header{
     display: flex;
-    align-items: center;
+    align-items: center; 
     width: auto;
     height: 85px;
     background: #f6f6f6;
@@ -156,6 +156,13 @@
     position: absolute;
     width: 100%;
     visibility: hidden;
+  }
+  .popupImg{
+    height: 120px;
+    width: auto;
+  }
+  .popUp_element{
+    margin-left: 170px;
   }
   @media only screen and (max-width: 980px) {
     .inactiveOnMobile{

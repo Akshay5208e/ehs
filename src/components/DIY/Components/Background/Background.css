@@ -11,6 +11,10 @@
     background: #fff;
     border: 2px solid #56ccf2;
     border-radius: 5px;
+    margin-left: -100px;
+}
+.background1,.background2{
+    margin-left: -75px;
 }
 .background-hr{
     color: #fff;

@@ -37,6 +37,8 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import image from "../../FakeData/FakeData";
+import { PowerInputSharp } from "@material-ui/icons";
 const MySwal = withReactContent(Swal);
 
 
@@ -74,7 +76,11 @@ const FinalPopup = (props) => {
   const [state,dispatch] = useReducer(reducer,1);
   const [authUser,setAuthUser] = useState("");
   const [finalMatDim,setFinalMatDim] = useState(props.finalMatDim);
-  const [amount,setAmount] = useState(props.price);
+  const [amount,setAmount] = useState("");
+  const [cartCountN, setCartCountN] = useContext(CartContext);
+  const [product, setProduct] = useState({
+    imgUrl: props.diyImage ,name: "My Design",description: "",category: [{title: ""}], subCategory: [{title: ""}],tags:"",sku: "",materialDimension: ""
+  });
   useEffect(()=>{
       if (JSON.parse(localStorage.getItem("userDetails123")))
   setAuthUser(
@@ -82,7 +88,18 @@ const FinalPopup = (props) => {
       JSON.parse(localStorage.getItem("userDetails123")).phonenumber
   );
   },[]);
-  let price=0;
+  
+
+  const calculatePrice=()=>{
+    if(props.mat==="Self Adhesive Vinyl" && props.dim==="7 inch x 10 inch" )
+    {
+      return 200;
+    }
+   
+    
+   
+  }
+  let price = calculatePrice();
   useEffect(()=>{
       let flag = true;
       // props.product && props.product.materialDimension.map((val,i)=> {
@@ -95,7 +112,7 @@ const FinalPopup = (props) => {
       //     }
       // });
       if(flag)
-     {    price=100;
+     {   
          setAmount(price * state);}
 
   },[state])
@@ -121,7 +138,7 @@ const FinalPopup = (props) => {
                           border: "none",
                       }} />
                       {/* <img src={props.product.imgUrl[0]} alt="productImage" className="toastImg " /> */}
-                      <img src="" alt="productImage" className="toastImg " />
+                      <img src={product.imgUrl} alt="productImage" className="toastImg " />
 
                       <div className="ml-2 ">
                       <p className="toastAddedText">Added to Cart</p>
@@ -161,25 +178,57 @@ const FinalPopup = (props) => {
       
       MySwal.clickConfirm();
 
-      if(authUser){
-          Axios.post(`${API}auth/update_user_cart`,{
-              poster_obj_id: props.productId,
-              material_obj_id: props.finalMatDim,
-              quantity: 1,
-          },
-          {   
-              headers: {"x-access-token": localStorage.getItem("ehstoken12345678910")},
-              params: {userId: JSON.parse(localStorage.getItem("userDetails123"))._id}
-          })
-          .then((res)=>{
-              //console.log(res);
-             addToCartConfirmPopup();
-                  window.location.reload(false);
+      // if(authUser){
+      //     Axios.post(`${API}auth/update_user_cart`,{
+      //         poster_obj_id: props.productId,
+      //         material_obj_id: props.finalMatDim,
+      //         quantity: 1,
+      //     },
+      //     {   
+      //         headers: {"x-access-token": localStorage.getItem("ehstoken12345678910")},
+      //         params: {userId: JSON.parse(localStorage.getItem("userDetails123"))._id}
+      //     })
+      //     .then((res)=>{
+      //         //console.log(res);
+      //        addToCartConfirmPopup();
+      //             window.location.reload(false);
                  
-          }).catch((err)=>{
-              console.log(err);
-          })
-      }else{
+      //     }).catch((err)=>{
+      //         console.log(err);
+      //     })
+      // }
+      if (authUser) {
+        Axios.post(`${API}auth/update_user_cart`, {
+            poster_obj_id: props.productId,
+            material_obj_id: props.finalMatDim,
+            quantity: state,
+        },
+            {
+                headers: { "x-access-token": localStorage.getItem("ehstoken12345678910") },
+                params: { userId: JSON.parse(localStorage.getItem("userDetails123"))._id }
+            })
+            .then((res) => {
+                console.log(res);
+                addToCartConfirmPopup();
+                window.location.reload(false);
+                setCartCountN(product);
+                // Axios.get(`${API}posters/getPosterById`, { params: { poster_obj_id: productId } }).then((res) => {
+                //     setProduct(res.data.data.posterDetails[0]);
+                //     console.log(res);
+                //     setRating(res.data.data.posterDetails[0].average_rating);
+                //     setRatingTotal(res.data.data.ratingTotalWise);
+                //     setTotalNoOfRating(res.data.data.totalNoOfRating);
+                //     //console.log(res.data.data.posterDetails[0])
+                //     setYouMayLike(res.data.data.youMayAlsoLike);
+                //     setSimilarItems(res.data.data.realtedPosters);
+                // }).catch((err) => {
+                //     console.log(err)
+                // });
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+      else{
           let ehsCart = [];
           let mat={
               material_title: props.mat,
@@ -187,8 +236,8 @@ const FinalPopup = (props) => {
               price: price
           }
           let finalProduct={
-              // productId: props.productId,
-              poster_details: props.product,
+               productId: props.productId,
+              poster_details: product,
               materialDimension: mat,
               quantity: state,
               total: amount
@@ -226,7 +275,7 @@ const FinalPopup = (props) => {
               right: "2px",
               color: "#000"
           }} />
-          <img src="" alt="productImage" className="popupImg" />
+          <img src={product.imgUrl} alt="productImage" className="popupImg" />
           <p className=" mt-2 popupTitle">My Design </p>
           
           {/* <img src={props.product.imgUrl[0]} alt="productImage" className="popupImg" />
@@ -267,7 +316,7 @@ const FinalPopup = (props) => {
                 </ButtonGroup>
                 <p className="qtyPopupText  mb-1 mt-2">Material: <span style={{fontWeight: "600"}}>{props.mat}</span></p>
                 <p className="qtyPopupText mb-2">Dimension: <span style={{fontWeight: "600"}}>{props.dim}</span></p>
-                <p className="qtyPopupText" style={{fontWeight: "normal"}}>Price: <span className="popupPrice ml-1"> ₹ {props.price * state}</span><span className="ml-2 ml-sm-3 popupPriceTag">(Inclusive of all Taxes)</span></p>
+                <p className="qtyPopupText" style={{fontWeight: "normal"}}>Price: <span className="popupPrice ml-1"> ₹ {amount}</span><span className="ml-2 ml-sm-3 popupPriceTag">(Inclusive of all Taxes)</span></p>
                 <div className="mx-auto popupBtn" role="button" onClick={addToCart}>Add to Cart</div>
           </div>
           <div className="d-flex justify-content-center mt-3">
@@ -321,7 +370,7 @@ const DiyHomeOne = () => {
     showUploadPanel ||
     showLogoPanel ||
     showBackgroundPanel
-      ? "0px"
+      ? "100px"
       : "-540px";
   const containerPictogramsTransition =
     showPanel ||
@@ -474,9 +523,12 @@ const [matNew,setMatNew] = useState([]);
 const [dimNew,setDimNew] = useState([]);
 const [dimActive, setDimActive] = useState("")
 const [matActive, setMatActive] = useState("")
+const [imageData,setImageData] = useState([])
+
+
 
 // const [state,dispatch] = useReducer(reducer,1);
-let price=100;
+let price=1000;
 let mat="";
 let dim="";
 let finalMatId="";
@@ -496,7 +548,12 @@ useEffect(()=>{
 
 //------------------------------for selecting material and dimension------------------------//
 
+html2canvas(inputRef.current).then((canvas)=>{ 
+  const imgData=  canvas.toDataURL("image/png");
+   setImageData(imgData);
 
+}
+)
 
 
 const MaterialSelect =  (e) => {           
@@ -505,15 +562,10 @@ const MaterialSelect =  (e) => {
  
   if(e.target.id === "m1")
   {
-      setMaterial("125 Micron (non-tearable)");
-      mat="125 Micron (non-tearable)";
-  }else if(e.target.id === "m2"){
-      setMaterial("Self-adhesive (premium)");
-      mat="Self-adhesive (premium)";
-  }else{
-      setMaterial("Self-adhesive 3mm sunboard (premium)");
-      mat="Self-adhesive 3mm sunboard (premium)"
+      setMaterial("Self Adhesive Vinyl");
+      mat="Self Adhesive Vinyl";
   }
+  
   setTimeout(()=>{
       MySwal.clickConfirm();
       selectDimensionPopupNew(mat);
@@ -528,14 +580,8 @@ const MaterialSelect =  (e) => {
      
       if(e.target.id === "m1")
       {
-          setDimension("16” x 24”");
-          dim="16” x 24”";
-      }else if(e.target.id === "m2"){
-          setDimension("19” x 27”");
-          dim="19” x 27”";
-      }else{
-          setDimension("24” x 36”");
-          dim="24” x 36”";
+          setDimension("7 inch x 10 inch”");
+          dim="7 inch x 10 inch";
       }
 
       
@@ -569,7 +615,7 @@ const MaterialSelect =  (e) => {
                      right: "2px",
                      color: "#000"
                  }} />
-                 <img src="" alt="productImage" className="popupImg" />
+                 <img src={imageData} alt="productImage" className="popupImg" />
                  <p className=" mt-2 popupTitle">My Design</p>
                  {/* <p className=" mt-2 popupTitle">{props.name}</p> */}
                  <div className=" mt-2  ">
@@ -588,15 +634,15 @@ const MaterialSelect =  (e) => {
                              <p className="text-center popupMaterialText mt-sm-3 mt-2">Self-adhesive 3mm sunboard (premium)</p>
                          </div>
                      </div> */}
-                     <div className="d-flex justify-content-between ">
+                     <div className="d-flex justify-content-between popUp_element ">
                      
                          
                                  
                                  <div className="popupMaterialDimension selected z-index-2" id="m1" role="button"   onClick={(e)=>MaterialSelect(e)} >
                                    <img src={Material2} className="popupMaterialImg1 " alt="material" ></img>
-                                   <p className="text-center popupMaterialText mt-sm-3 mt-2">125 Micron (non-tearable)</p>
+                                   <p className="text-center popupMaterialText mt-sm-3 mt-2">Self Adhesive Vinyl</p>
                                 </div>
-                             
+                                
                                  
                         
                      </div>
@@ -633,11 +679,11 @@ const selectDimensionPopupNew = (mat) => {
                    right: "2px",
                    color: "#000"
                }} />
-               <img src={imgGenerator}alt="productImage" className="popupImg" />
+               <img src={imageData}alt="productImage" className="popupImg" />
                <p className=" mt-2 popupTitle">My Design</p>
                <div className=" mt-2 ">
                    <p className="popupHead  mb-3">Select Dimension</p>
-                   <div className="d-flex justify-content-between ">
+                   <div className="d-flex justify-content-between popUp_element ">
                        {/* <div className="popupMaterialDimension selected" id="m1" role="button"  onClick={(e)=>dimensionSelect(e,mat)}  >
                            <img src={dimension1} className="popupDimensionImg1 mt-3 mb-sm-3 " alt="material" ></img>
                            <p className="text-center popupMaterialText mt-sm-4 mt-4">16in by 24in</p>
@@ -653,9 +699,11 @@ const selectDimensionPopupNew = (mat) => {
                  
                             <div className="popupMaterialDimension selected" id="m1" role="button"  onClick={(e)=>dimensionSelect(e,mat)}  >
                                 <img src={dimension1} className="popupDimensionImg1 mt-3 mb-sm-3 " alt="material" ></img>
-                                <p className="text-center popupMaterialText mt-sm-4 mt-4">16in by 24in</p>
+                                <p className="text-center popupMaterialText mt-sm-4 mt-4">7 inch x 10 inch</p>
+                                
                             </div>
                             
+                       
                    </div>
                </div>
                <div className="d-flex justify-content-center mt-3">
@@ -685,21 +733,36 @@ const id=()=>{
   return id;
 
 }
-const imgGenerator=()=>{
-  html2canvas(inputRef.current).then((canvas) => {
-    var image = canvas.toDataURL("png");
-    var a = document.createElement("a");
-    // a.setAttribute("download", "myImage.png");
-    // a.setAttribute("href", image);
-    // a.click();
-    return a;
-  });
-}
+
+
+// const imgGenerator=()=>{
+//   html2canvas(inputRef.current).then((canvas) => {
+//     const imgData = canvas.toDataURL("image/png");
+//     // a.setAttribute("download", "myImage.png");
+//     // a.setAttribute("href", image);
+//     // a.click();
+//     // setProduct({imgUrl:image})
+//     setProduct({imgUrl:imgData})
+ 
+//   });
+ 
+// }
+
+  // html2canvas(document.getElementById('#diyBodyPrint')).then((canvas)=>{ 
+  //   const imgData = canvas.toDataURL("image/png");
+  
+  // }
+  // )
+
+
+
+
+
 
 const selectQuantityPopupNew=(mat,dim)=>{
   MySwal.fire( {
     // html: <FinalPopup mat={mat} dim={dim} price={price} product={props.product} finalMatDim={finalMatId} productId={props.product._id} />,
-    html: <FinalPopup mat={mat} dim={dim} price={price}  finalMatDim={finalMatId} productId={id} />,
+    html: <FinalPopup mat={mat} dim={dim} price={price} diyImage = {imageData}  finalMatDim={finalMatId} productId={id} />,
     didRender: true,
     padding: "10px",
     backdrop: "rgba(0, 0, 0, 0.6)",
@@ -718,11 +781,6 @@ const selectQuantityPopupNew=(mat,dim)=>{
 }
 
 
-//--------------------------------------------------------------------------------------//
-const addToCart = () => {
-        
-  
-}
 
 
 
@@ -779,11 +837,7 @@ const addToCart = () => {
 //   );
 //  // console.log(authUser,localStorage.getItem("userDetails123"),product);
 // },[]);
-  const idGenerator=()=>{
 
-  }
-  
- 
 
 
 //   const addToCartConfirmPopup = () => {
@@ -1176,7 +1230,7 @@ const addToCart = () => {
           }}
           className="diy-container col"
         >
-          <div className="diy-body">
+          <div className="diy-body" id = "diyBodyPrint">
             <div>
               <MainBody
                 imgState={imgState}
@@ -1715,13 +1769,13 @@ const addToCart = () => {
         </div>
       </div>
       <div className=" download-container py-5 mx-auto">
-          <button className="download-pdf-png btn mb-2" onClick={printDocumentPDF}>
+          {/* <button className="download-pdf-png btn mb-2" onClick={printDocumentPDF}>
             <GetAppIcon />
             Download PDF
-          </button>
+          </button> */}
           <button className="download-pdf-png  btn mb-2" onClick={printDocumentPNG}>
             <GetAppIcon />
-            Download PNG
+            Download 
           </button>
           <button
             className="place-order download-pdf-png  btn mb-2"

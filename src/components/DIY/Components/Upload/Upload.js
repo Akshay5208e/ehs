@@ -9,7 +9,7 @@ const Upload = ({ handleLogAndImgChange }) => {
         <h4 className="pictograms-h4">UPLOAD IMAGES</h4>
       </div>
       <div className="upload-logo-container-body">
-        <div>
+        <div className="background_div">
           <p className="mb-4 text-center">
             Upload your Pictures, <br /> Pictogram and Symbols
           </p>
